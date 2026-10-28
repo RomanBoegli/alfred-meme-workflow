@@ -1065,7 +1065,7 @@ Details live in _index.yml inside the meme folder.
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/RomanBoegli/alfred-meme-workflow</string>
 </dict>
