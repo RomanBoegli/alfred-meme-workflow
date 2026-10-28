@@ -1,0 +1,21 @@
+#!/bin/zsh
+# Symlinks this repo into Alfred's workflow folder, so changes to the memes,
+# keywords or scripts are live without rebuilding. Run with --unlink to undo.
+
+set -e
+repo="${0:A:h:h}"
+
+prefs=$(defaults read com.runningwithcrayons.Alfred-Preferences syncfolder 2>/dev/null || echo "~/Library/Application Support/Alfred")
+prefs="${prefs/#\~/$HOME}/Alfred.alfredpreferences/workflows"
+target="$prefs/user.workflow.memes-dev"
+
+if [[ "$1" == --unlink ]]; then
+  [[ -L "$target" ]] && rm "$target" && echo "Removed $target"
+  exit 0
+fi
+
+[[ -d "$prefs" ]] || { echo "Alfred workflow folder not found: $prefs" >&2; exit 1; }
+[[ -e "$target" && ! -L "$target" ]] && { echo "$target exists and is not a symlink" >&2; exit 1; }
+
+ln -sfn "$repo" "$target"
+echo "Linked $target -> $repo"

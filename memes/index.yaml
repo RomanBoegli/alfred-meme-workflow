@@ -1,0 +1,720 @@
+# Meme collection index. One entry per image file in this folder.
+#
+#   title:     name shown in Alfred
+#   keywords:  words you'd search for: moods, reactions, characters
+#   notes:     optional free text, e.g. when to use it
+#   source:    optional origin (URL)
+#   added:     date it joined the collection
+#
+# Edited by the workflow (`memes` keyword) or by hand. Extra fields are kept,
+# comments other than this header are not.
+
+absolute_disbelieve.webp:
+  title: absolute disbelieve
+  keywords: [no way, shocked, omg, gasp, disbelief, surprised, wow, scream]
+  added: 2026-10-28
+
+Angry.png:
+  title: Angry
+  keywords: [rage comic, rage, furious, mad, annoyed]
+  added: 2026-10-28
+
+angry_computer.webp:
+  title: angry computer
+  keywords: [rage, throw, computer, smash, pc, broken, furious, it, tech]
+  added: 2026-10-28
+
+Aww_Yeah.png:
+  title: Aww Yeah
+  keywords: [aww, yeah, "yes", success, happy, celebrate, win]
+  added: 2026-10-28
+
+Aww_Yeah_funny_heavy_laugh_guy.webp:
+  title: Aww Yeah funny heavy laugh guy
+  keywords: [crying laughing, laugh, lol, hilarious, lmao, rofl]
+  added: 2026-10-28
+
+beautiful.webp:
+  title: beautiful
+  keywords: [tears, touched, moved, emotional, crying, joy, wholesome, cute]
+  added: 2026-10-28
+
+Beer_Guy.png:
+  title: Beer Guy
+  keywords: [cereal guy, beer, drink, suspicious, stare]
+  added: 2026-10-28
+
+BirdPerson.png:
+  title: BirdPerson
+  keywords: [rick and morty, bird person, deadpan, serious]
+  added: 2026-10-28
+
+bored_boy_thinking.webp:
+  title: bored boy thinking
+  keywords: [bored, thinking, hmm, pondering, skeptical, meh]
+  added: 2026-10-28
+
+cat_cuddling.webp:
+  title: cat cuddling
+  keywords: [cat, love, cuddle, cute, wholesome, affection, hug]
+  added: 2026-10-28
+
+caveman_computer.webp:
+  title: caveman computer
+  keywords: [caveman, stupid, tech, illiterate, confused, computer, smash, dumb]
+  added: 2026-10-28
+
+Cereal_Guy.png:
+  title: Cereal Guy
+  keywords: [cereal guy, stare, suspicious, what, eating]
+  added: 2026-10-28
+
+Cereal_Spitting.png:
+  title: Cereal Spitting
+  keywords: [spit take, cereal, spit, shocked, surprised, wtf]
+  added: 2026-10-28
+
+Challenge_Accepted.png:
+  title: Challenge Accepted
+  keywords: [challenge accepted, bring it on, determined, confident]
+  added: 2026-10-28
+
+Clean_Fuck_Yea.png:
+  title: Clean Fuck Yea
+  keywords: [fuck yeah, success, proud, victory, win, satisfied]
+  added: 2026-10-28
+
+cmon_dude.webp:
+  title: cmon dude
+  keywords: [come on, dude, smug, disappointed, seriously]
+  added: 2026-10-28
+
+computer_anger.webp:
+  title: computer anger
+  keywords: [rage, bite, laptop, frustrated, angry, computer, it, tech]
+  added: 2026-10-28
+
+computer_guy.png:
+  title: computer guy
+  keywords: [computer, stare, skeptical, reading, meh, suspicious]
+  added: 2026-10-28
+
+computer_guy_facepalm.png:
+  title: computer guy facepalm
+  keywords: [facepalm, computer, desperate, fail, bug, error]
+  added: 2026-10-28
+
+computer_not_working.webp:
+  title: computer not working
+  keywords: [not working, confused, why, broken, bug, wtf, tech, it]
+  added: 2026-10-28
+
+Concentrated.png:
+  title: Concentrated
+  keywords: [focus, concentrate, tongue, effort, trying]
+  added: 2026-10-28
+
+confused-travolta.webp:
+  title: confused travolta
+  keywords: [confused, lost, where, looking, around, nothing, travolta]
+  added: 2026-10-28
+
+crazy_man_laughing.webp:
+  title: crazy man laughing
+  keywords: [laugh, crazy, insane, hysterical, lol, madness]
+  added: 2026-10-28
+
+crow_amazed.webp:
+  title: crow amazed
+  keywords: [wide eyes, bird, crow, amazed, shocked, stare]
+  added: 2026-10-28
+
+crow_angry.webp:
+  title: crow angry
+  keywords: [side eye, bird, crow, angry, stare, judging]
+  added: 2026-10-28
+
+crow_thinking.webp:
+  title: crow thinking
+  keywords: [bird, crow, thinking, hmm, pondering, chin]
+  added: 2026-10-28
+
+dead_inside.png:
+  title: dead inside
+  keywords: [dead inside, empty, tired, done, exhausted, meh]
+  added: 2026-10-28
+
+Derrrp.png:
+  title: Derrrp
+  keywords: [derp, stupid, dumb, drool, silly]
+  added: 2026-10-28
+
+desperate_woman.webp:
+  title: desperate woman
+  keywords: [desperate, nervous, anxious, stressed, scared, panic]
+  added: 2026-10-28
+
+Determined.png:
+  title: Determined
+  keywords: [game face, determined, focus, serious, challenge]
+  added: 2026-10-28
+
+disbelieve_cmon.webp:
+  title: disbelieve cmon
+  keywords: [come on, facepalm, picard, disbelief, seriously, embarrassed]
+  added: 2026-10-28
+
+dog_so_beautiful.png:
+  title: dog so beautiful
+  keywords: [adventure time, jake dog, beautiful, amazing, wow, wholesome]
+  added: 2026-10-28
+
+dont_like_it.webp:
+  title: dont like it
+  keywords: [dislike, disgust, angry, grumpy, nope, pissed]
+  added: 2026-10-28
+
+drake_does_like.png:
+  title: drake does like
+  keywords: [drake, "yes", approve, like, prefer, good]
+  added: 2026-10-28
+
+drake_does_not_like.webp:
+  title: drake does not like
+  keywords: [drake, "no", reject, dislike, nope, disapprove]
+  added: 2026-10-28
+
+dude.webp:
+  title: dude
+  keywords: [dude, bro, what, disbelief]
+  added: 2026-10-28
+
+Dude_Come_On.png:
+  title: Dude Come On
+  keywords: [come on, dude, unimpressed, skeptical, seriously]
+  added: 2026-10-28
+
+elmo_on_fire.gif:
+  title: elmo on fire
+  keywords: [everything is fine, fire, chaos, burn, hell, evil, elmo, destruction]
+  added: 2026-10-28
+
+EWBTE_Nice_Good.png:
+  title: EWBTE Nice Good
+  keywords: [thumbs up, nice, good, approve, ok]
+  added: 2026-10-28
+
+Excited_Troll.png:
+  title: Excited Troll
+  keywords: [troll, excited, crazy, happy, hyped]
+  added: 2026-10-28
+
+extreme_big_smile.png:
+  title: extreme big smile
+  keywords: [smile, grin, creepy, happy, troll]
+  added: 2026-10-28
+
+Fap_Fap_Fab.png:
+  title: Fap Fap Fab
+  keywords: [fap, excited]
+  added: 2026-10-28
+
+feels_good.webp:
+  title: feels good
+  keywords: [feels good, relief, satisfied, bliss, nice, relaxed]
+  added: 2026-10-28
+
+Feels_Good_Nice.png:
+  title: Feels Good Nice
+  keywords: [feels good, relief, satisfied, bliss, nice]
+  added: 2026-10-28
+
+fish.webp:
+  title: fish
+  keywords: [spongebob, fish, shocked, stare, surprised]
+  added: 2026-10-28
+
+Forever_Alone.png:
+  title: Forever Alone
+  keywords: [forever alone, sad, lonely, crying, single]
+  added: 2026-10-28
+
+Forever_Alone_Excited.png:
+  title: Forever Alone Excited
+  keywords: [forever alone, excited, happy, lonely]
+  added: 2026-10-28
+
+Fuck_Yea.png:
+  title: Fuck Yea
+  keywords: [fuck yeah, success, proud, victory, win, satisfied]
+  added: 2026-10-28
+
+Fuck_Yea_Female.png:
+  title: Fuck Yea Female
+  keywords: [fuck yeah, woman, success, proud, satisfied]
+  added: 2026-10-28
+
+Full_Panel_very_angry.png:
+  title: Full Panel very angry
+  keywords: [rage, furious, fffuuu, extreme, angry]
+  added: 2026-10-28
+
+funny_how_dare_you.webp:
+  title: funny how dare you
+  keywords: [how dare you, laugh, mock, offended, sarcastic]
+  added: 2026-10-28
+
+giggling.webp:
+  title: giggling
+  keywords: [giggle, laugh, hehe, lol, funny]
+  added: 2026-10-28
+
+giggling_2.webp:
+  title: giggling 2
+  keywords: [giggle, laugh, hehe, embarrassed, funny]
+  added: 2026-10-28
+
+grin_face.webp:
+  title: grin face
+  keywords: [grin, troll, smug, evil, smile]
+  added: 2026-10-28
+
+happy-face-meme.png:
+  title: happy face meme
+  keywords: [happy, smile, grin, cheeky]
+  added: 2026-10-28
+
+happy_clap_yeah.webp:
+  title: happy clap yeah
+  keywords: [clap, yay, applause, happy]
+  added: 2026-10-28
+
+Happy_Nice.png:
+  title: Happy Nice
+  keywords: [happy, excited, joy, nice]
+  added: 2026-10-28
+
+Happy_Smile.png:
+  title: Happy Smile
+  keywords: [happy, smile, content, pleased]
+  added: 2026-10-28
+
+heavy_decision_guy.webp:
+  title: heavy decision guy
+  keywords: [tough decision, sweating, nervous, stress, pressure, dilemma]
+  added: 2026-10-28
+
+hehe_yea_going_great.webp:
+  title: hehe yea going great
+  keywords: [rubbing hands, robbie rotten, evil plan, scheming, great, hehe]
+  added: 2026-10-28
+
+Hehehe.png:
+  title: Hehehe
+  keywords: [hehe, grin, smug, sneaky]
+  added: 2026-10-28
+
+hmm_sceptical.webp:
+  title: hmm sceptical
+  keywords: [hmm, skeptical, suspicious, doubt]
+  added: 2026-10-28
+
+horse.webp:
+  title: horse
+  keywords: [horse, laugh, lol, teeth, silly, grin]
+  added: 2026-10-28
+
+how_funny.webp:
+  title: how funny
+  keywords: [rolling floor, laugh, lol, hilarious, rofl]
+  added: 2026-10-28
+
+laser_eyes.webp:
+  title: laser eyes
+  keywords: [laser, eyes, evil, power, intense]
+  added: 2026-10-28
+
+Laughing_Bitch_Please.png:
+  title: Laughing Bitch Please
+  keywords: [bitch please, yao ming, laugh, lol, dismissive]
+  added: 2026-10-28
+
+laughing_dog.webp:
+  title: laughing dog
+  keywords: [dog, laugh, evil, lol]
+  added: 2026-10-28
+
+laughing_evil.webp:
+  title: laughing evil
+  keywords: [dr evil, laugh, villain, group, lol, mocking]
+  added: 2026-10-28
+
+laughing_men.webp:
+  title: laughing men
+  keywords: [laugh, lol, group, mocking, businessmen]
+  added: 2026-10-28
+
+Me_Gusta_Derp.png:
+  title: Me Gusta Derp
+  keywords: [me gusta, like, creepy, pleased]
+  added: 2026-10-28
+
+Milk_Big_Eyes.png:
+  title: Milk Big Eyes
+  keywords: [big, eyes, shocked, milk, spit, surprised]
+  added: 2026-10-28
+
+Newspaper_Guy.png:
+  title: Newspaper Guy
+  keywords: [newspaper, reading, unimpressed, wtf, meh]
+  added: 2026-10-28
+
+no_clue_whats_going_on.webp:
+  title: no clue whats going on
+  keywords: [no idea, shrug, dunno, clueless, confused]
+  added: 2026-10-28
+
+no_idea_what_to_do.webp:
+  title: no idea what to do
+  keywords: [no idea, shrug, dunno, clueless, confused, helpless]
+  added: 2026-10-28
+
+oh_no_please.webp:
+  title: oh no please
+  keywords: ["no", please, stop, nope, reject, refuse]
+  added: 2026-10-28
+
+oh_stop_it.webp:
+  title: oh stop it
+  keywords: [oh stop it, blush, flattered, you, compliment]
+  added: 2026-10-28
+
+Okay_Face_Sad_No_Okay.png:
+  title: Okay Face Sad No Okay
+  keywords: [okay, sad, resigned, disappointed, accept]
+  added: 2026-10-28
+
+Okay_Face_Sad_Okay.png:
+  title: Okay Face Sad Okay
+  keywords: [okay, sad, resigned, disappointed, accept]
+  added: 2026-10-28
+
+old_angry_man.webp:
+  title: old angry man
+  keywords: [angry, old, man, grumpy, pointing, scolding]
+  added: 2026-10-28
+
+Original_Troll.png:
+  title: Original Troll
+  keywords: [troll face, trolling, problem, gotcha]
+  added: 2026-10-28
+
+owl_confused.webp:
+  title: owl confused
+  keywords: [wide eyes, owl, confused, shocked, stare, bird]
+  added: 2026-10-28
+
+Poker_Face.png:
+  title: Poker Face
+  keywords: [poker face, expressionless, neutral, blank]
+  added: 2026-10-28
+
+Prrrr_Weird_Tongue.png:
+  title: Prrrr Weird Tongue
+  keywords: [tongue, silly, derp, prrr, weird]
+  added: 2026-10-28
+
+Rage_Fuck_Angry.png:
+  title: Rage Fuck Angry
+  keywords: [rage, fffuuu, furious, angry]
+  added: 2026-10-28
+
+Rage_Fuck_Angry_Original.png:
+  title: Rage Fuck Angry Original
+  keywords: [rage, fffuuu, furious, angry]
+  added: 2026-10-28
+
+raven_angry.webp:
+  title: raven angry
+  keywords: [side eye, bird, raven, angry, stare, judging]
+  added: 2026-10-28
+
+raven_disbelieve.webp:
+  title: raven disbelieve
+  keywords: [wide eyes, bird, raven, shocked, disbelief, stare]
+  added: 2026-10-28
+
+raven_knife.webp:
+  title: raven knife
+  keywords: [bird, raven, knife, threat, violence, stab]
+  added: 2026-10-28
+
+raven_thinking.webp:
+  title: raven thinking
+  keywords: [bird, raven, thinking, hmm, pondering, chin]
+  added: 2026-10-28
+
+really_boy.webp:
+  title: really boy
+  keywords: [side eye, really, skeptical, doubt, suspicious, kid]
+  added: 2026-10-28
+
+really_dont_trust_my_eyes.webp:
+  title: really dont trust my eyes
+  keywords: [really, disbelief, glasses, what, wtf]
+  added: 2026-10-28
+
+recommended.png:
+  title: recommended
+  keywords: [thumbs up, recommended, stamp, approve, endorse]
+  added: 2026-10-28
+
+recursive_hulk_hogan_recursion.png:
+  title: recursive hulk hogan recursion
+  keywords: [infinite loop, hulk hogan, recursion, recursive]
+  added: 2026-10-28
+
+reported.webp:
+  title: reported
+  keywords: [reported, snitch, tattletale, report]
+  added: 2026-10-28
+
+schrute_angry.gif:
+  title: schrute angry
+  keywords: [the office, dwight, angry, rage, furious]
+  added: 2026-10-28
+
+Serious_No_Kidding_Grumpy.png:
+  title: Serious No Kidding Grumpy
+  keywords: [not kidding, serious, grumpy, unimpressed, annoyed]
+  added: 2026-10-28
+
+spechless_silent.png:
+  title: spechless silent
+  keywords: [speechless, silent, shocked, blank, stare]
+  added: 2026-10-28
+
+speechless_neutral.png:
+  title: speechless neutral
+  keywords: [poker face, speechless, neutral, blank]
+  added: 2026-10-28
+
+spongebob_caveman.webp:
+  title: spongebob caveman
+  keywords: [spongebob, caveman, primitive, dumb, mocking]
+  added: 2026-10-28
+
+spongebob_eager.webp:
+  title: spongebob eager
+  keywords: [spongebob, squidward, eager, excited, curious]
+  added: 2026-10-28
+
+steveo_giggle.webp:
+  title: steveo giggle
+  keywords: [laugh, giggle, grin, funny]
+  added: 2026-10-28
+
+stick_cool_yeah.webp:
+  title: stick cool yeah
+  keywords: [cool, wink, pointing, yeah, nice, cyanide]
+  added: 2026-10-28
+
+stick_disgust.webp:
+  title: stick disgust
+  keywords: [disgust, eww, gross, yuck, cyanide]
+  added: 2026-10-28
+
+stick_excited_happy.webp:
+  title: stick excited happy
+  keywords: [excited, happy, yay, cyanide]
+  added: 2026-10-28
+
+stretched_neck_guy_whoa.png:
+  title: stretched neck guy whoa
+  keywords: [stretch neck, look closer, whoa, wow, computer]
+  added: 2026-10-28
+
+Suspicious_Think_Hmm.png:
+  title: Suspicious Think Hmm
+  keywords: [suspicious, hmm, skeptical, thinking, chin]
+  added: 2026-10-28
+
+Suspicious_Think_Hmm_Arms_crossed.png:
+  title: Suspicious Think Hmm Arms crossed
+  keywords: [suspicious, hmm, skeptical, challenge, doubt]
+  added: 2026-10-28
+
+theoffice_cmon.webp:
+  title: theoffice cmon
+  keywords: [the office, come on, jim, smug, unimpressed]
+  added: 2026-10-28
+
+theoffice_ups.webp:
+  title: theoffice ups
+  keywords: [michael scott, the office, oops, cringe, awkward]
+  added: 2026-10-28
+
+think_man.webp:
+  title: think man
+  keywords: [think about it, roll safe, tap head, smart, clever]
+  added: 2026-10-28
+
+thinking_really.webp:
+  title: thinking really
+  keywords: [thinking, hmm, suspicious, really]
+  added: 2026-10-28
+
+thinking_strong.webp:
+  title: thinking strong
+  keywords: [thinking, smug, pepe, intense, hmm]
+  added: 2026-10-28
+
+thinking_truly.webp:
+  title: thinking truly
+  keywords: [american psycho, thinking, hmm, shush]
+  added: 2026-10-28
+
+Thoughtful_Think_Hmm.png:
+  title: Thoughtful Think Hmm
+  keywords: [thinking, hmm, pondering, curious]
+  added: 2026-10-28
+
+thumbs_up_boy_good.webp:
+  title: thumbs up boy good
+  keywords: [thumbs up, good, approve, ok, nice]
+  added: 2026-10-28
+
+thumbs_up_light.webp:
+  title: thumbs up light
+  keywords: [thumbs up, idea, approve, bright]
+  added: 2026-10-28
+
+told_you.webp:
+  title: told you
+  keywords: [told you so, i knew it, shocked, yelling]
+  added: 2026-10-28
+
+Troll_Dad_Full.png:
+  title: Troll Dad Full
+  keywords: [troll dad, gentleman, monocle, pipe]
+  added: 2026-10-28
+
+Troll_Dad_Jump.png:
+  title: Troll Dad Jump
+  keywords: [troll dad, dance, jump, happy]
+  added: 2026-10-28
+
+two_guys_wondering.webp:
+  title: two guys wondering
+  keywords: [thinking, wondering, skeptical, hmm, pondering]
+  added: 2026-10-28
+
+ups.webp:
+  title: ups
+  keywords: [hand over mouth, uh oh, oops, shocked, mistake]
+  added: 2026-10-28
+
+uuh_nice.webp:
+  title: uuh nice
+  keywords: [american psycho, nice, impressed, approve]
+  added: 2026-10-28
+
+very_angry_guy_kill.png:
+  title: very angry guy kill
+  keywords: [rage, strangle, kill, furious]
+  added: 2026-10-28
+
+Wait_A_Minute_Hmmm.png:
+  title: Wait A Minute Hmmm
+  keywords: [wait a minute, hmm, realization, suspicious]
+  added: 2026-10-28
+
+What_Bitch.png:
+  title: What Bitch
+  keywords: [what, huh, confused, wtf]
+  added: 2026-10-28
+
+Why_With_Hands_Cmon.png:
+  title: Why With Hands Cmon
+  keywords: [come on, why, frustrated, desperate]
+  added: 2026-10-28
+
+wojak_big_brain_sitting.png:
+  title: wojak big brain sitting
+  keywords: [galaxy brain, big brain, genius, smart]
+  added: 2026-10-28
+
+wojak_big_brain_surfing.png:
+  title: wojak big brain surfing
+  keywords: [galaxy brain, big brain, genius, smart]
+  added: 2026-10-28
+
+wojak_chillin.webp:
+  title: wojak chillin
+  keywords: [chill, relaxed, stoned, high, dumb]
+  added: 2026-10-28
+
+wojak_dumb.webp:
+  title: wojak dumb
+  keywords: [dumb, stupid, derp]
+  added: 2026-10-28
+
+wojak_dumb_brain.webp:
+  title: wojak dumb brain
+  keywords: [small brain, dumb, stupid, derp]
+  added: 2026-10-28
+
+wojak_friendly_smile.webp:
+  title: wojak friendly smile
+  keywords: [smile, friendly, happy, cheerful]
+  added: 2026-10-28
+
+wojak_helicopter.webp:
+  title: wojak helicopter
+  keywords: [dumb, idiot, stupid, derp, helicopter]
+  added: 2026-10-28
+
+wojak_homosapiens_thinking.webp:
+  title: wojak homosapiens thinking
+  keywords: [caveman, neanderthal, dumb, primitive]
+  added: 2026-10-28
+
+wojak_nerd.webp:
+  title: wojak nerd
+  keywords: [nerd, soyjak, glasses]
+  added: 2026-10-28
+
+wojak_nerd_cry.webp:
+  title: wojak nerd cry
+  keywords: [nerd, cry, soyjak, triggered, upset]
+  added: 2026-10-28
+
+wojak_senior_nerd.webp:
+  title: wojak senior nerd
+  keywords: [senior, nerd, glasses, experienced, expert]
+  added: 2026-10-28
+
+wojak_small_brain.webp:
+  title: wojak small brain
+  keywords: [small brain, dumb, stupid]
+  added: 2026-10-28
+
+wojak_smile_dumb.webp:
+  title: wojak smile dumb
+  keywords: [dumb, smile, stupid, derp, happy]
+  added: 2026-10-28
+
+yeah_but_hmm.jpg:
+  title: yeah but hmm
+  keywords: [well actually, yeah, but, objection, counterpoint]
+  added: 2026-10-28
+
+yes_please.webp:
+  title: yes please
+  keywords: [yes please, smug, approve, greedy]
+  added: 2026-10-28
+
+Yuno_Cmon.png:
+  title: Yuno Cmon
+  keywords: [y u no, why, frustrated, angry]
+  added: 2026-10-28

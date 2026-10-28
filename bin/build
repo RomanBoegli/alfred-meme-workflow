@@ -1,0 +1,20 @@
+#!/bin/zsh
+# Bundles the workflow, including all memes, into memes.alfredworkflow.
+# Double-click the result to install or update it in Alfred.
+
+set -e
+cd "${0:A:h:h}"
+
+version=$(/usr/libexec/PlistBuddy -c 'Print :version' info.plist)
+out=memes.alfredworkflow
+stage=$(mktemp -d)
+trap 'rm -rf "$stage"' EXIT
+
+# ship info.plist without personal hotkeys
+./bin/info-plist-clean < info.plist > "$stage/info.plist"
+cp -R icon.png README.md CHANGELOG.md LICENSE src memes "$stage/"
+
+rm -f "$out"
+(cd "$stage" && zip -qr -X - . -x '*.DS_Store') > "$out"
+
+echo "Built $out (v$version, $(ls memes | grep -vc '\.yaml$') memes)"
