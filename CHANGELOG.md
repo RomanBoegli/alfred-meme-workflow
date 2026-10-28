@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0
+
+A plain meme browser for your own collection, ready for the Alfred Gallery.
+
+- **Choose your meme folder** when installing (Configure Workflow → Meme folder). Your memes and `_index.yml` live there. 1.x installs keep using the old workflow data folder until you pick one.
+- The workflow no longer bundles memes, so it's a small download. `memes` → **Add the starter collection** downloads the 160 curated memes with notes into your folder, without overwriting anything you have.
+- Removed the Telegram sticker import and the bot token setting. Adding videos still turns them into animated GIFs.
+- Removed the in-workflow update check; install new releases from GitHub (or through Alfred once it's in the Gallery).
+- Sharper 512 px icon.
+
 ## 1.1.0
 
 - Update check: the `memes` menu shows "Update available" when a newer release is on GitHub (checked at most once a day); `↩` installs it, keeping your memes. `memes update` checks right away.

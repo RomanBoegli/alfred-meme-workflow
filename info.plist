@@ -34,19 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2D0D3AC4-1DA5-55EC-8B99-7491BECF6779</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>876DBB17-3ECB-5C88-8E12-7E663DA89A1B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>56682117-1D42-5BB8-A081-27820F90B516</key>
 		<array>
 			<dict>
@@ -165,60 +152,12 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C12D9BCD-9AFF-5215-95FA-B3A60EA785D7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>BC71AE41-A768-52FF-A9B7-E7DBB276E75D</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8A2C5EFC-F342-5324-906C-C0A90A7AA532</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A8F730D-9667-5048-9616-01D9240D2395</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2D0D3AC4-1DA5-55EC-8B99-7491BECF6779</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>Add all stickers of this pack</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>8A8F730D-9667-5048-9616-01D9240D2395</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>876DBB17-3ECB-5C88-8E12-7E663DA89A1B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C12D9BCD-9AFF-5215-95FA-B3A60EA785D7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A2C5EFC-F342-5324-906C-C0A90A7AA532</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -619,20 +558,6 @@
 						<key>uid</key>
 						<string>8A6032B1-0983-58A5-8148-6AB2FCCB0DE2</string>
 					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:next}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>pack</string>
-						<key>outputlabel</key>
-						<string>Sticker pack</string>
-						<key>uid</key>
-						<string>BC71AE41-A768-52FF-A9B7-E7DBB276E75D</string>
-					</dict>
 				</array>
 				<key>elselabel</key>
 				<string>Done</string>
@@ -686,97 +611,20 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>osascript -l JavaScript ./src/memes.js pack "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C12D9BCD-9AFF-5215-95FA-B3A60EA785D7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>columncount</key>
-				<integer>5</integer>
-				<key>filterable</key>
-				<true/>
-				<key>fixedorder</key>
-				<true/>
-				<key>imageaspect</key>
-				<integer>2</integer>
-				<key>inputfile</key>
-				<string></string>
-				<key>inputtype</key>
-				<integer>0</integer>
-				<key>loadingtext</key>
-				<string>Loading stickers…</string>
-				<key>showsubtitles</key>
-				<true/>
-				<key>showtitles</key>
-				<false/>
-				<key>subtitlesinfooter</key>
-				<true/>
-				<key>titlesinfooter</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.grid</string>
-			<key>uid</key>
-			<string>8A2C5EFC-F342-5324-906C-C0A90A7AA532</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>osascript -l JavaScript ./src/memes.js addall "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2D0D3AC4-1DA5-55EC-8B99-7491BECF6779</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
-	<string>meme [query]   Grid of all memes. The query after the keyword is typo-tolerant and ranked; typing inside the grid filters further.
+	<string>A fast meme browser for your own collection. Pick your meme folder in Configure Workflow; an empty folder is fine.
+
+meme [query]   Grid of all memes. The query after the keyword is typo-tolerant and ranked; typing inside the grid filters further.
   ↩   copy the meme (file + image data)
   ⌘↩  reveal in Finder
   ⌥↩  copy the file path
   ⌃↩  edit its details
   ⇧ / ⌘Y  Quick Look preview
 
-memes [query]  Manage the collection: add the Finder selection, import a Telegram sticker pack (paste a t.me/addstickers/… link), annotate memes without details, edit or remove (⌘↩) a meme.
+memes [query]  Manage the collection: add the Finder selection, add the starter collection (160 curated memes with notes), annotate memes without details, edit or remove (⌘↩) a meme.
 
-Add images or short videos from Finder with the "Add to Memes" Universal Action, or set a hotkey on the Hotkey trigger. Videos and animated stickers become animated GIFs (needs ffmpeg). Animated memes show ▶︎ in the grid. A short guide asks for title, keywords, notes and source.
+Add images or short videos from Finder with the "Add to Memes" Universal Action, or set a hotkey on the Hotkey trigger. Videos become animated GIFs (needs ffmpeg). Animated memes show ▶︎ in the grid. A short guide asks for title, keywords, notes and source.
 
 Details live in _index.yml inside the meme folder.
 </string>
@@ -785,128 +633,107 @@ Details live in _index.yml inside the meme folder.
 		<key>02F758FE-39FA-50C5-9411-41CC75A2BA55</key>
 		<dict>
 			<key>xpos</key>
-			<real>700</real>
+			<real>700.0</real>
 			<key>ypos</key>
-			<real>10</real>
+			<real>10.0</real>
 		</dict>
 		<key>0C29902E-44C6-5E8D-A60E-BC0BB786E48A</key>
 		<dict>
 			<key>xpos</key>
-			<real>210</real>
+			<real>210.0</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>40.0</real>
 		</dict>
 		<key>2CA1A317-58A5-5AB9-A0A1-2658B8C6308B</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>30.0</real>
 			<key>ypos</key>
-			<real>800</real>
-		</dict>
-		<key>2D0D3AC4-1DA5-55EC-8B99-7491BECF6779</key>
-		<dict>
-			<key>xpos</key>
-			<real>1130</real>
-			<key>ypos</key>
-			<real>860</real>
+			<real>800.0</real>
 		</dict>
 		<key>3657F38F-CE62-5F44-8403-CBA87C56BF8B</key>
 		<dict>
 			<key>xpos</key>
-			<real>700</real>
+			<real>700.0</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>250.0</real>
 		</dict>
 		<key>52A04E16-B9BF-5DF2-BBBB-DA543FD763FC</key>
 		<dict>
 			<key>xpos</key>
-			<real>790</real>
+			<real>790.0</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>520.0</real>
 		</dict>
 		<key>56682117-1D42-5BB8-A081-27820F90B516</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>30.0</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>420.0</real>
 		</dict>
 		<key>5EB998AE-9C4C-50B4-BACA-7C6B34209248</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>30.0</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>680.0</real>
 		</dict>
 		<key>6486CF8C-E8DC-547B-AAE0-6B68BCCF47BF</key>
 		<dict>
 			<key>xpos</key>
-			<real>480</real>
+			<real>480.0</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>40.0</real>
 		</dict>
 		<key>792BBDF6-4BDC-5A73-86C1-AAC653A5EE26</key>
 		<dict>
 			<key>xpos</key>
-			<real>210</real>
+			<real>210.0</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>800.0</real>
 		</dict>
 		<key>876DBB17-3ECB-5C88-8E12-7E663DA89A1B</key>
 		<dict>
 			<key>xpos</key>
-			<real>660</real>
+			<real>660.0</real>
 			<key>ypos</key>
-			<real>590</real>
-		</dict>
-		<key>8A2C5EFC-F342-5324-906C-C0A90A7AA532</key>
-		<dict>
-			<key>xpos</key>
-			<real>960</real>
-			<key>ypos</key>
-			<real>780</real>
+			<real>590.0</real>
 		</dict>
 		<key>8A8F730D-9667-5048-9616-01D9240D2395</key>
 		<dict>
 			<key>xpos</key>
-			<real>480</real>
+			<real>480.0</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>560.0</real>
 		</dict>
 		<key>BAC23A0F-E7E9-5203-ABFE-D3D810B7AF0C</key>
 		<dict>
 			<key>xpos</key>
-			<real>700</real>
+			<real>700.0</real>
 			<key>ypos</key>
-			<real>130</real>
-		</dict>
-		<key>C12D9BCD-9AFF-5215-95FA-B3A60EA785D7</key>
-		<dict>
-			<key>xpos</key>
-			<real>790</real>
-			<key>ypos</key>
-			<real>780</real>
+			<real>130.0</real>
 		</dict>
 		<key>D7E03655-9BEE-5879-BC1E-054D18FE2FD6</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>30.0</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>560.0</real>
 		</dict>
 		<key>D805932E-926B-5C1C-910B-FBDADF131A72</key>
 		<dict>
 			<key>xpos</key>
-			<real>790</real>
+			<real>790.0</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>650.0</real>
 		</dict>
 		<key>F324D1EB-1BA9-50F9-88C5-C443CDA847DD</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>30.0</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>40.0</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1011,7 +838,7 @@ Details live in _index.yml inside the meme folder.
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Format for converted videos and Telegram video stickers. WebP needs img2webp (brew install webp).</string>
+			<string>Format videos are converted to. WebP needs img2webp (brew install webp); GIF also works in PowerPoint.</string>
 			<key>label</key>
 			<string>Animated format</string>
 			<key>type</key>
@@ -1027,39 +854,18 @@ Details live in _index.yml inside the meme folder.
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string>Workflow data folder</string>
+				<string></string>
 				<key>required</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>description</key>
-			<string>Leave empty to keep the collection in the workflow data folder (it starts with the bundled memes and survives updates). Pick a folder to keep it elsewhere, e.g. a synced folder or a git checkout.</string>
+			<string>Folder with your memes (images, GIFs, short videos). Their details are kept in _index.yml inside it. An empty folder is fine: add the starter collection with the manage keyword.</string>
 			<key>label</key>
 			<string>Meme folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>memes_dir</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Only for importing sticker packs. Create a bot with @BotFather in Telegram and paste its token.</string>
-			<key>label</key>
-			<string>Telegram bot token</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>telegram_token</string>
 		</dict>
 	</array>
 	<key>variablesdontexport</key>

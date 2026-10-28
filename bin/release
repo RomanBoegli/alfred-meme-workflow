@@ -1,6 +1,7 @@
 #!/bin/zsh
 # Prepares a release: sets the version in info.plist, commits and tags it.
-# Pushing the tag makes GitHub Actions build and publish memes.alfredworkflow.
+# Pushing the tag makes GitHub Actions build and publish memes.alfredworkflow
+# and memes-starter.zip.
 #
 #   bin/release 1.2.0
 

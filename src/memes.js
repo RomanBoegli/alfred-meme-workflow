@@ -19,9 +19,8 @@ const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'heic'];
 // converted to an animated image on import (needs ffmpeg)
 const VIDEO_EXT = ['webm', 'mp4', 'mov', 'm4v'];
 const TOOL_DIRS = ['/opt/homebrew/bin', '/usr/local/bin', '/usr/bin'];
-const REPO = 'RomanBoegli/alfred-meme-workflow';
-const UPDATE_CHECK_HOURS = 24;
-const STICKER_LINK = /(?:t\.me\/addstickers\/|addstickers\?set=)([A-Za-z0-9_]+)/;
+// curated memes with notes, published with every release (bin/build)
+const STARTER_URL = 'https://github.com/RomanBoegli/alfred-meme-workflow/releases/latest/download/memes-starter.zip';
 const INDEX_FILE = '_index.yml';
 const FIELDS = ['title', 'keywords', 'notes', 'source', 'added'];
 const GUIDED_STEPS = ['title', 'keywords', 'notes', 'source'];
@@ -38,7 +37,8 @@ const ICONS = {
 	source: 'BookmarkIcon.icns',
 	filename: 'ToolbarCustomizeIcon.icns',
 	cutout: 'ToolbarAdvanced.icns',
-	update: 'DownloadsFolder.icns',
+	starter: 'DownloadsFolder.icns',
+	folder: 'GenericFolderIcon.icns',
 };
 
 function icon(name) {
@@ -72,25 +72,16 @@ function workflowDir() {
 	return fm.currentDirectoryPath.js;
 }
 
-let memesDirCache = null;
+let memesDirCache;
 
-// Where the collection lives: the configured folder; the memes/ of a git
-// checkout (bin/link); otherwise the workflow's data folder, which survives
-// workflow updates and starts out as a copy of the bundled memes.
+// Where the collection lives: the folder chosen in Configure Workflow. 1.x
+// kept it in the workflow data folder, which is used until a folder is chosen.
+// '' when there is none yet.
 function memesDir() {
-	if (memesDirCache) return memesDirCache;
-	const configured = env('memes_dir').trim();
-	const bundled = workflowDir() + '/memes';
-	let dir = bundled;
-	if (configured) {
-		dir = expandHome(configured);
-	} else if (!exists(workflowDir() + '/.git') && env('alfred_workflow_data')) {
-		dir = env('alfred_workflow_data') + '/memes';
-		if (!exists(dir)) {
-			fm.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dirname(dir), true, $(), null);
-			fm.copyItemAtPathToPathError(bundled, dir, null);
-		}
-	}
+	if (memesDirCache !== undefined) return memesDirCache;
+	const legacy = env('alfred_workflow_data') && `${env('alfred_workflow_data')}/memes`;
+	let dir = expandHome(env('memes_dir').trim()) || (legacy && exists(legacy) ? legacy : '');
+	if (dir) fm.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dir, true, $(), null);
 	memesDirCache = dir.replace(/\/+$/, '');
 	return memesDirCache;
 }
@@ -148,7 +139,7 @@ function hasTool(name) {
 	return TOOL_DIRS.some(d => exists(`${d}/${name}`));
 }
 
-// Format video stickers and clips are converted to, see src/animate.zsh.
+// Format videos are converted to, see src/animate.zsh.
 // GIF by default: animated WebP doesn't play in PowerPoint and other Office apps.
 function animatedExt() {
 	return env('animated_format') === 'webp' && hasTool('img2webp') ? 'webp' : 'gif';
@@ -166,14 +157,6 @@ function shellQuote(s) {
 
 function dirname(p) {
 	return p.replace(/\/[^/]+$/, '');
-}
-
-function dataDir() {
-	return env('alfred_workflow_data') || $.NSTemporaryDirectory().js + 'memes-workflow-data';
-}
-
-function stickersDir() {
-	return `${dataDir()}/stickers`;
 }
 
 function isAnimated(p) {
@@ -206,15 +189,6 @@ function cutOut(input, output) {
 	const rep = $.NSBitmapImageRep.alloc.initWithCIImage($.CIImage.imageWithCVPixelBuffer(buffer));
 	const png = rep.representationUsingTypeProperties($.NSBitmapImageFileTypePNG, $({}));
 	return png.writeToFileAtomically(output, true) ? '' : 'Could not write the cut-out';
-}
-
-// "😂" -> "face with tears of joy"
-function emojiNames(emoji) {
-	if (!emoji) return [];
-	const named = $(emoji).stringByApplyingTransformReverse($.NSStringTransformToUnicodeName, false).js;
-	return (named.match(/\\N\{[^}]+\}/g) || [])
-		.map(n => n.slice(3, -1).toLowerCase())
-		.filter(n => !/^(variation selector|zero width joiner|emoji modifier)/.test(n));
 }
 
 function titleFromFilename(name) {
@@ -547,7 +521,6 @@ function startSession(paths) {
 	const inCollection = realPath(dirname(first)) === dir;
 	const name = basename(first);
 	const entry = inCollection ? loadIndex()[name] : null;
-	const pack = loadPack(dirname(first));
 	const s = {
 		mode: inCollection ? 'edit' : 'add',
 		guided: !entry,
@@ -563,14 +536,6 @@ function startSession(paths) {
 		},
 		queue,
 	};
-	// stickers start out with their emoji as title and keywords
-	if (pack) {
-		const names = emojiNames(pack.stickers[name]);
-		s.pack = dirname(first);
-		s.values.title = names.join(' ') || s.values.title;
-		s.values.keywords = names;
-		s.values.source = pack.link;
-	}
 	saveSession(s);
 	return s;
 }
@@ -578,63 +543,6 @@ function startSession(paths) {
 function targetExt(s) {
 	if (s.cutout) return 'png';
 	return s.mode === 'add' && isVideo(s.source) ? animatedExt() : extOf(s.file);
-}
-
-// ---------------------------------------------------------------- sticker packs
-
-function loadPack(dir) {
-	const text = readText(`${dir}/pack.json`);
-	return text ? JSON.parse(text) : null;
-}
-
-function packStickers(dir) {
-	const names = fm.contentsOfDirectoryAtPathError(dir, null);
-	if (names.isNil()) return [];
-	return names.js.map(n => n.js).filter(n => isImage(n)).sort(byName).map(n => `${dir}/${n}`);
-}
-
-function stagedPacks() {
-	const names = fm.contentsOfDirectoryAtPathError(stickersDir(), null);
-	if (names.isNil()) return [];
-	return names.js.map(n => `${stickersDir()}/${n.js}`)
-		.map(dir => ({ dir, pack: loadPack(dir), stickers: packStickers(dir) }))
-		.filter(p => p.pack);
-}
-
-function importPack(name) {
-	const dest = `${stickersDir()}/${name}`;
-	const result = JSON.parse(shell(
-		`animated_format=${animatedExt()} telegram_token=${shellQuote(env('telegram_token'))} ${shellQuote(workflowDir() + '/src/telegram.zsh')} ${shellQuote(name)} ${shellQuote(dest)}`));
-	if (!result.ok) return next('notify', result.error);
-
-	const skipped = [
-		result.skipped_tgs && `${result.skipped_tgs} Lottie`,
-		result.skipped_video && `${result.skipped_video} video (install ffmpeg)`,
-		result.failed && `${result.failed} failed`,
-	].filter(Boolean);
-	if (!result.added) return next('notify', `Nothing to import from "${result.title}"${skipped.length ? `: skipped ${skipped.join(', ')}` : ''}`);
-	return next('pack', dest);
-}
-
-// Grid of the stickers of a downloaded pack that aren't in the collection yet.
-function packGrid(dir) {
-	const pack = loadPack(dir) || { stickers: {}, title: basename(dir) };
-	const items = packStickers(dir).map(p => {
-		const emoji = pack.stickers[basename(p)] || '';
-		return {
-			uid: p,
-			type: 'file:skipcheck',
-			title: emojiNames(emoji).join(' ') || basename(p),
-			subtitle: `${emoji} ${pack.title} · ↩ add · ⌘↩ add all`,
-			match: `${emojiNames(emoji).join(' ')} ${emoji}`,
-			arg: p,
-			icon: { path: p },
-			quicklookurl: p,
-		};
-	});
-	if (!items.length) items.push({ title: 'All stickers of this pack are in the collection', valid: false });
-	const columns = parseInt(env('grid_columns'), 10) || 5;
-	return JSON.stringify({ alfredworkflow: { arg: scriptFilter(items), config: { columncount: columns } } });
 }
 
 function prefill(s) {
@@ -685,80 +593,40 @@ function grid(query) {
 			},
 		}));
 	if (!items.length) {
-		items.push({ title: query ? `No meme matches "${query}"` : 'No memes yet', subtitle: 'Add some with the "memes" keyword', valid: false });
+		items.push(query
+			? { title: `No meme matches "${query}"`, valid: false }
+			: { title: 'No memes yet', subtitle: `Use "${manageKeyword()}" to add your own or the starter collection`, valid: false });
 	}
-	// The Grid View takes its items as the argument; columns come from the user configuration.
+	return gridOutput(items);
+}
+
+// The Grid View takes its items as the argument; columns come from the user configuration.
+function gridOutput(items) {
 	const columns = parseInt(env('grid_columns'), 10) || 5;
 	return JSON.stringify({ alfredworkflow: { arg: scriptFilter(items), config: { columncount: columns } } });
 }
 
-// ---------------------------------------------------------------- menu
-
-// ---------------------------------------------------------------- updates
-
-function currentVersion() {
-	const fromAlfred = env('alfred_workflow_version');
-	if (fromAlfred) return fromAlfred;
-	const plist = $.NSDictionary.dictionaryWithContentsOfFile(workflowDir() + '/info.plist');
-	return plist.isNil() ? '0.0.0' : plist.objectForKey('version').js;
+function manageKeyword() {
+	return env('manage_keyword') || 'memes';
 }
 
-function newerThan(a, b) {
-	const pa = a.split('.').map(Number), pb = b.split('.').map(Number);
-	for (let i = 0; i < 3; i++) if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) > (pb[i] || 0);
-	return false;
-}
-
-// Latest GitHub release, cached for a day: { reached, release: { version,
-// url, page } | null }. Never throws: offline means no update is shown.
-function latestRelease(force) {
-	const cache = `${dirname(sessionPath())}/latest-release.json`;
-	const cached = readText(cache);
-	if (cached && !force) {
-		const c = JSON.parse(cached);
-		if (Date.now() - c.checked < UPDATE_CHECK_HOURS * 3600 * 1000) return c;
-	}
-	let r;
-	try {
-		r = JSON.parse(shell(`curl -sS --max-time 2 -H 'Accept: application/vnd.github+json' https://api.github.com/repos/${REPO}/releases/latest`));
-	} catch (e) {
-		return cached && !force ? JSON.parse(cached) : { reached: false, release: null };
-	}
-	const asset = (r.assets || []).find(a => a.name.endsWith('.alfredworkflow'));
-	const result = {
-		checked: Date.now(),
-		reached: true,
-		release: r.tag_name && asset ? { version: r.tag_name.replace(/^v/, ''), url: asset.browser_download_url, page: r.html_url } : null,
+// Shown instead of everything else until a meme folder is chosen.
+function noFolder(command) {
+	const item = {
+		title: 'Choose your meme folder',
+		subtitle: 'Where your memes live; an empty folder is fine · ↩ open Configure Workflow',
+		arg: JSON.stringify({ cmd: 'configure' }),
+		icon: icon('folder'),
 	};
-	writeText(cache, JSON.stringify(result));
-	return result;
-}
-
-// A git checkout is updated with git pull, not through releases.
-function updatesEnabled() {
-	return !exists(workflowDir() + '/.git');
-}
-
-function updateItems(force) {
-	const current = currentVersion();
-	const { reached, release: latest } = latestRelease(force);
-	if (latest && newerThan(latest.version, current)) {
-		return [{
-			title: `Update available: v${latest.version}`,
-			subtitle: `You have v${current} · ↩ install (your memes are kept) · ⌘↩ release notes`,
-			arg: JSON.stringify({ cmd: 'update', url: latest.url, version: latest.version }),
-			icon: icon('update'),
-			mods: { cmd: { arg: JSON.stringify({ cmd: 'open-url', url: latest.page }), subtitle: 'Open the release page' } },
-		}];
+	switch (command) {
+		case 'grid': return gridOutput([Object.assign(item, { valid: false, subtitle: `Set it in Configure Workflow, or ↩ on it in "${manageKeyword()}"` })]);
+		case 'menu': return scriptFilter([item]);
+		case 'form': return scriptFilter([Object.assign(item, { valid: false })]);
+		default: return next('notify', 'Choose your meme folder in Configure Workflow first');
 	}
-	if (!force) return [];
-	return [{
-		title: !reached ? 'Could not reach GitHub' : latest ? `Memes v${current} is up to date` : 'No release published yet',
-		subtitle: !reached ? 'Check your connection and try again' : latest ? `Latest release: v${latest.version}` : `github.com/${REPO}/releases`,
-		valid: false,
-		icon: icon('update'),
-	}];
 }
+
+// ---------------------------------------------------------------- menu
 
 function menu(query) {
 	const index = loadIndex();
@@ -766,24 +634,15 @@ function menu(query) {
 	const items = [];
 	const act = (cmd, extra = {}) => JSON.stringify(Object.assign({ cmd }, extra));
 
-	if (/^(update|upgrade|version)/i.test(query) && updatesEnabled()) return scriptFilter(updateItems(true));
-
-	const link = query.match(STICKER_LINK);
-	if (link) {
-		const hasToken = !!env('telegram_token').trim();
-		return scriptFilter([{
-			title: `Import sticker pack "${link[1]}"`,
-			subtitle: hasToken
-				? `Downloads the stickers, then shows them to pick from${hasTool('ffmpeg') ? '' : ' · video stickers need ffmpeg'}`
-				: 'Set a Telegram bot token in Configure Workflow first (from @BotFather)',
-			arg: act('import', { name: link[1] }),
-			valid: hasToken,
-			icon: icon('add'),
-		}]);
-	}
+	const starter = {
+		title: 'Add the starter collection',
+		subtitle: '160 curated memes with notes, downloaded from GitHub · memes you already have are kept',
+		arg: act('starter'),
+		icon: icon('starter'),
+	};
 
 	if (!query) {
-		if (updatesEnabled()) items.push(...updateItems(false));
+		if (!all.length) items.push(starter);
 		const s = loadSession();
 		if (s) {
 			items.push({
@@ -800,19 +659,6 @@ function menu(query) {
 			arg: act('add-finder'),
 			icon: icon('add'),
 		});
-		items.push({
-			title: 'Import a Telegram sticker pack',
-			subtitle: 'Paste a t.me/addstickers/… link after the keyword',
-			valid: false,
-			icon: icon('add'),
-		});
-		stagedPacks().forEach(p => items.push({
-			title: `Sticker pack: ${p.pack.title}`,
-			subtitle: `${p.stickers.length} sticker${p.stickers.length === 1 ? '' : 's'} not yet added · ↩ browse · ⌘↩ delete download`,
-			arg: act('pack', { dir: p.dir }),
-			icon: { path: p.stickers[0] || SYSTEM_ICONS + ICONS.add },
-			mods: { cmd: { arg: act('drop-pack', { dir: p.dir }), subtitle: 'Delete the downloaded stickers' } },
-		}));
 		const unannotated = all.filter(m => !m.indexed);
 		if (unannotated.length) {
 			items.push({
@@ -831,6 +677,7 @@ function menu(query) {
 				icon: icon('remove'),
 			});
 		}
+		if (all.length) items.push(starter);
 	}
 
 	search(query, all).forEach(m => items.push({
@@ -939,7 +786,7 @@ function form(query) {
 				title: s.mode === 'add' ? `Add "${v.title}" to the collection` : `Save "${v.title}"`,
 				subtitle: `${s.mode === 'edit' ? 'Writes the changes to _index.yml'
 					: isVideo(s.source) ? `Converts it to an animated ${targetExt(s).toUpperCase()} as ${fileName}`
-					: `${s.pack ? 'Moves' : 'Copies'} the file as ${fileName}`}${queued} · ⇧ preview`,
+					: `Copies the file as ${fileName}`}${queued} · ⇧ preview`,
 				arg: act('save'),
 			}));
 			items.push(field('Title', v.title, 'title', '—'));
@@ -977,34 +824,19 @@ function finderSelection() {
 
 function act(args) {
 	const raw = args.join('\t').trim();
-	if (!raw.startsWith('{')) return add(raw.split('\t'));
+	const c = raw.startsWith('{') ? JSON.parse(raw) : null;
+	if (c && c.cmd === 'configure') return configure();
+	if (!memesDir()) return noFolder('act');
+	if (!c) return add(raw.split('\t'));
 
-	const c = JSON.parse(raw);
 	const s = loadSession();
 
 	switch (c.cmd) {
 		case 'add-finder':
 			return add(finderSelection());
 
-		case 'import':
-			return importPack(c.name);
-
-		case 'pack':
-			return next('pack', c.dir);
-
-		case 'update': {
-			const file = `${dirname(sessionPath())}/memes-${c.version}.alfredworkflow`;
-			shell(`curl -fsSL --max-time 120 -o ${shellQuote(file)} ${shellQuote(c.url)} && open ${shellQuote(file)}`);
-			return next('notify', `Opening v${c.version} in Alfred, confirm to update`);
-		}
-
-		case 'open-url':
-			shell(`open ${shellQuote(c.url)}`);
-			return next('none');
-
-		case 'drop-pack':
-			fm.removeItemAtPathError(c.dir, null);
-			return next('notify', 'Deleted the downloaded stickers');
+		case 'starter':
+			return addStarter();
 
 		case 'annotate':
 			return add(collection().filter(m => !m.indexed).map(m => m.path));
@@ -1088,11 +920,6 @@ function add(paths) {
 	return showForm(startSession(usable));
 }
 
-// ⌘↩ in a sticker pack grid: guide through every remaining sticker of the pack.
-function addAll(path) {
-	return add(packStickers(dirname(path)));
-}
-
 function save(s) {
 	const index = loadIndex();
 	const dir = memesDir();
@@ -1104,10 +931,8 @@ function save(s) {
 		if (isVideo(s.source)) {
 			const target = `${dir}/${name.replace(/\.[^.]+$/, '')}`;
 			name = basename(shell(`animated_format=${animatedExt()} ${shellQuote(workflowDir() + '/src/animate.zsh')} ${shellQuote(s.source)} ${shellQuote(target)}`).trim());
-		} else if (s.cutout || s.pack) {
-			// stickers leave the staging folder once added
-			if (!fm.moveItemAtPathToPathError(s.cutout || s.source, `${dir}/${name}`, null)) return next('notify', `Could not move ${basename(s.source)} into the collection`);
-			if (s.pack && s.cutout) fm.removeItemAtPathError(s.source, null);
+		} else if (s.cutout) {
+			if (!fm.moveItemAtPathToPathError(s.cutout, `${dir}/${name}`, null)) return next('notify', `Could not move the cut-out into the collection`);
 		} else if (!fm.copyItemAtPathToPathError(s.source, `${dir}/${name}`, null)) {
 			return next('notify', `Could not copy ${basename(s.source)} into the collection`);
 		}
@@ -1138,9 +963,41 @@ function save(s) {
 	const queue = s.queue.filter(exists);
 	if (queue.length) return showForm(startSession(queue));
 	clearSession();
-	// back to the pack to pick the next sticker
-	if (s.pack && packStickers(s.pack).length) return next('pack', s.pack);
 	return next('notify', message);
+}
+
+// Opens this workflow's Configure Workflow sheet at the meme folder setting.
+function configure() {
+	shell(`open ${shellQuote(`alfredpreferences://navigateto/workflows>workflow>${env('alfred_workflow_uid')}>userconfig>memes_dir`)}`);
+	return next('none');
+}
+
+// Merges the starter collection into the meme folder: files that are already
+// there and existing index entries are left alone.
+function addStarter() {
+	const dir = memesDir();
+	const tmp = `${dirname(sessionPath())}/starter`;
+	fm.removeItemAtPathError(tmp, null);
+	try {
+		shell(`mkdir -p ${shellQuote(tmp)} && curl -fsSL --max-time 300 -o ${shellQuote(tmp + '/starter.zip')} ${shellQuote(env('starter_url') || STARTER_URL)}`
+			+ ` && ditto -x -k ${shellQuote(tmp + '/starter.zip')} ${shellQuote(tmp + '/memes')}`);
+	} catch (e) {
+		fm.removeItemAtPathError(tmp, null);
+		return next('notify', 'Could not download the starter collection, check your connection');
+	}
+	const starterIndex = parseYaml(readText(`${tmp}/memes/${INDEX_FILE}`) || '');
+	const index = loadIndex();
+	const names = fm.contentsOfDirectoryAtPathError(`${tmp}/memes`, null).js.map(n => n.js).filter(isImage);
+	let added = 0;
+	for (const name of names) {
+		if (exists(`${dir}/${name}`)) continue;
+		fm.copyItemAtPathToPathError(`${tmp}/memes/${name}`, `${dir}/${name}`, null);
+		if (!(name in index) && starterIndex[name]) index[name] = starterIndex[name];
+		added++;
+	}
+	saveIndex(index);
+	fm.removeItemAtPathError(tmp, null);
+	return next('notify', added ? `Added ${added} meme${added === 1 ? '' : 's'} from the starter collection` : 'You already have every starter meme');
 }
 
 function remove(s) {
@@ -1159,13 +1016,12 @@ function run(argv) {
 	const [command, ...args] = argv;
 	const query = (args[0] || '').normalize('NFC');
 	try {
+		if (!memesDir() && command !== 'act') return noFolder(command);
 		switch (command) {
 			case 'grid': return grid(query.trim());
 			case 'menu': return menu(query.trim());
 			case 'form': return form(query);
 			case 'act': return act(args);
-			case 'pack': return packGrid(query);
-			case 'addall': return addAll(query);
 		}
 		throw new Error(`Unknown command ${command}`);
 	} catch (e) {

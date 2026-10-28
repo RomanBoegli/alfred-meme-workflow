@@ -1,20 +1,26 @@
 #!/bin/zsh
-# Bundles the workflow, including all memes, into memes.alfredworkflow.
-# Double-click the result to install or update it in Alfred.
+# Builds memes.alfredworkflow (the workflow, without memes) and
+# memes-starter.zip (memes/ with its _index.yml), which the workflow's
+# "Add the starter collection" downloads from the latest release.
+# Double-click the .alfredworkflow to install or update it in Alfred.
 
 set -e
 cd "${0:A:h:h}"
 
 version=$(/usr/libexec/PlistBuddy -c 'Print :version' info.plist)
 out=memes.alfredworkflow
+starter=memes-starter.zip
 stage=$(mktemp -d)
 trap 'rm -rf "$stage"' EXIT
 
 # ship info.plist without personal hotkeys
 ./bin/info-plist-clean < info.plist > "$stage/info.plist"
-cp -R icon.png README.md CHANGELOG.md LICENSE src memes "$stage/"
+cp -R icon.png README.md CHANGELOG.md LICENSE src "$stage/"
 
-rm -f "$out"
+rm -f "$out" "$starter"
 (cd "$stage" && zip -qr -X - . -x '*.DS_Store') > "$out"
+(cd memes && zip -qr -X - . -x '*.DS_Store' '.*') > "$starter"
 
-echo "Built $out (v$version, $(ls memes | grep -vc '^_') memes)"
+size() { du -h "$1" | cut -f1 | tr -d ' '; }
+echo "Built $out (v$version, $(size $out))"
+echo "Built $starter ($(ls memes | grep -vc '^_') memes, $(size $starter))"
