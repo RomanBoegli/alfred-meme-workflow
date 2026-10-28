@@ -14,7 +14,7 @@ Or from the terminal:
 curl -fsSL -o /tmp/memes.alfredworkflow https://github.com/RomanBoegli/alfred-meme-workflow/releases/latest/download/memes.alfredworkflow && open /tmp/memes.alfredworkflow
 ```
 
-To update, install the new release the same way; your memes and their details are kept. They live in Alfred's workflow data folder (`~/Library/Application Support/Alfred/Workflow Data/ch.romanboegli.memes/memes`), or in any folder you pick as **Meme folder** in *Configure Workflow*.
+When a new version is out, `memes` shows **Update available**; `↩` installs it (`memes update` checks right away). Your memes and their details are kept. They live in Alfred's workflow data folder (`~/Library/Application Support/Alfred/Workflow Data/ch.romanboegli.memes/memes`), or in any folder you pick as **Meme folder** in *Configure Workflow*.
 
 **Curating the collection in this repo** (maintainers):
 

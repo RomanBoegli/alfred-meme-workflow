@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- Update check: the `memes` menu shows "Update available" when a newer release is on GitHub (checked at most once a day); `↩` installs it, keeping your memes. `memes update` checks right away.
+
 ## 1.0.0
 
 First public release.

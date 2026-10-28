@@ -19,6 +19,8 @@ const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'heic'];
 // converted to an animated image on import (needs ffmpeg)
 const VIDEO_EXT = ['webm', 'mp4', 'mov', 'm4v'];
 const TOOL_DIRS = ['/opt/homebrew/bin', '/usr/local/bin', '/usr/bin'];
+const REPO = 'RomanBoegli/alfred-meme-workflow';
+const UPDATE_CHECK_HOURS = 24;
 const STICKER_LINK = /(?:t\.me\/addstickers\/|addstickers\?set=)([A-Za-z0-9_]+)/;
 const INDEX_FILE = '_index.yml';
 const FIELDS = ['title', 'keywords', 'notes', 'source', 'added'];
@@ -36,6 +38,7 @@ const ICONS = {
 	source: 'BookmarkIcon.icns',
 	filename: 'ToolbarCustomizeIcon.icns',
 	cutout: 'ToolbarAdvanced.icns',
+	update: 'DownloadsFolder.icns',
 };
 
 function icon(name) {
@@ -691,11 +694,79 @@ function grid(query) {
 
 // ---------------------------------------------------------------- menu
 
+// ---------------------------------------------------------------- updates
+
+function currentVersion() {
+	const fromAlfred = env('alfred_workflow_version');
+	if (fromAlfred) return fromAlfred;
+	const plist = $.NSDictionary.dictionaryWithContentsOfFile(workflowDir() + '/info.plist');
+	return plist.isNil() ? '0.0.0' : plist.objectForKey('version').js;
+}
+
+function newerThan(a, b) {
+	const pa = a.split('.').map(Number), pb = b.split('.').map(Number);
+	for (let i = 0; i < 3; i++) if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) > (pb[i] || 0);
+	return false;
+}
+
+// Latest GitHub release, cached for a day: { reached, release: { version,
+// url, page } | null }. Never throws: offline means no update is shown.
+function latestRelease(force) {
+	const cache = `${dirname(sessionPath())}/latest-release.json`;
+	const cached = readText(cache);
+	if (cached && !force) {
+		const c = JSON.parse(cached);
+		if (Date.now() - c.checked < UPDATE_CHECK_HOURS * 3600 * 1000) return c;
+	}
+	let r;
+	try {
+		r = JSON.parse(shell(`curl -sS --max-time 2 -H 'Accept: application/vnd.github+json' https://api.github.com/repos/${REPO}/releases/latest`));
+	} catch (e) {
+		return cached && !force ? JSON.parse(cached) : { reached: false, release: null };
+	}
+	const asset = (r.assets || []).find(a => a.name.endsWith('.alfredworkflow'));
+	const result = {
+		checked: Date.now(),
+		reached: true,
+		release: r.tag_name && asset ? { version: r.tag_name.replace(/^v/, ''), url: asset.browser_download_url, page: r.html_url } : null,
+	};
+	writeText(cache, JSON.stringify(result));
+	return result;
+}
+
+// A git checkout is updated with git pull, not through releases.
+function updatesEnabled() {
+	return !exists(workflowDir() + '/.git');
+}
+
+function updateItems(force) {
+	const current = currentVersion();
+	const { reached, release: latest } = latestRelease(force);
+	if (latest && newerThan(latest.version, current)) {
+		return [{
+			title: `Update available: v${latest.version}`,
+			subtitle: `You have v${current} · ↩ install (your memes are kept) · ⌘↩ release notes`,
+			arg: JSON.stringify({ cmd: 'update', url: latest.url, version: latest.version }),
+			icon: icon('update'),
+			mods: { cmd: { arg: JSON.stringify({ cmd: 'open-url', url: latest.page }), subtitle: 'Open the release page' } },
+		}];
+	}
+	if (!force) return [];
+	return [{
+		title: !reached ? 'Could not reach GitHub' : latest ? `Memes v${current} is up to date` : 'No release published yet',
+		subtitle: !reached ? 'Check your connection and try again' : latest ? `Latest release: v${latest.version}` : `github.com/${REPO}/releases`,
+		valid: false,
+		icon: icon('update'),
+	}];
+}
+
 function menu(query) {
 	const index = loadIndex();
 	const all = collection(index);
 	const items = [];
 	const act = (cmd, extra = {}) => JSON.stringify(Object.assign({ cmd }, extra));
+
+	if (/^(update|upgrade|version)/i.test(query) && updatesEnabled()) return scriptFilter(updateItems(true));
 
 	const link = query.match(STICKER_LINK);
 	if (link) {
@@ -712,6 +783,7 @@ function menu(query) {
 	}
 
 	if (!query) {
+		if (updatesEnabled()) items.push(...updateItems(false));
 		const s = loadSession();
 		if (s) {
 			items.push({
@@ -919,6 +991,16 @@ function act(args) {
 
 		case 'pack':
 			return next('pack', c.dir);
+
+		case 'update': {
+			const file = `${dirname(sessionPath())}/memes-${c.version}.alfredworkflow`;
+			shell(`curl -fsSL --max-time 120 -o ${shellQuote(file)} ${shellQuote(c.url)} && open ${shellQuote(file)}`);
+			return next('notify', `Opening v${c.version} in Alfred, confirm to update`);
+		}
+
+		case 'open-url':
+			shell(`open ${shellQuote(c.url)}`);
+			return next('none');
 
 		case 'drop-pack':
 			fm.removeItemAtPathError(c.dir, null);
