@@ -11,9 +11,15 @@
 
 ObjC.import('Foundation');
 ObjC.import('AppKit');
+ObjC.import('Vision');
+ObjC.import('CoreImage');
 
 const fm = $.NSFileManager.defaultManager;
 const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'heic'];
+// converted to an animated image on import (needs ffmpeg)
+const VIDEO_EXT = ['webm', 'mp4', 'mov', 'm4v'];
+const TOOL_DIRS = ['/opt/homebrew/bin', '/usr/local/bin', '/usr/bin'];
+const STICKER_LINK = /(?:t\.me\/addstickers\/|addstickers\?set=)([A-Za-z0-9_]+)/;
 const FIELDS = ['title', 'keywords', 'notes', 'source', 'added'];
 const GUIDED_STEPS = ['title', 'keywords', 'notes', 'source'];
 const SYSTEM_ICONS = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/';
@@ -29,6 +35,7 @@ const ICONS = {
 	notes: 'ToolbarInfo.icns',
 	source: 'BookmarkIcon.icns',
 	filename: 'ToolbarCustomizeIcon.icns',
+	cutout: 'ToolbarAdvanced.icns',
 };
 
 function icon(name) {
@@ -105,6 +112,81 @@ function extOf(name) {
 
 function isImage(p) {
 	return IMAGE_EXT.includes(extOf(p));
+}
+
+function isVideo(p) {
+	return VIDEO_EXT.includes(extOf(p));
+}
+
+function hasTool(name) {
+	return TOOL_DIRS.some(d => exists(`${d}/${name}`));
+}
+
+// Format video stickers and clips are converted to, see src/animate.zsh.
+function animatedExt() {
+	return hasTool('img2webp') ? 'webp' : 'gif';
+}
+
+function shell(command) {
+	const app = Application.currentApplication();
+	app.includeStandardAdditions = true;
+	return app.doShellScript(command, { alteringLineEndings: false });
+}
+
+function shellQuote(s) {
+	return `'${String(s).replace(/'/g, `'\\''`)}'`;
+}
+
+function dirname(p) {
+	return p.replace(/\/[^/]+$/, '');
+}
+
+function dataDir() {
+	return env('alfred_workflow_data') || $.NSTemporaryDirectory().js + 'memes-workflow-data';
+}
+
+function stickersDir() {
+	return `${dataDir()}/stickers`;
+}
+
+function isAnimated(p) {
+	// WebP: "RIFF....WEBPVP8X" header with the animation flag set
+	if (extOf(p) === 'webp') {
+		const head = $.NSFileHandle.fileHandleForReadingAtPath(p);
+		if (head.isNil()) return false;
+		const raw = $.NSString.alloc.initWithDataEncoding(head.readDataOfLength(21), $.NSISOLatin1StringEncoding).js;
+		head.closeFile;
+		return raw.slice(12, 16) === 'VP8X' && (raw.charCodeAt(20) & 0x02) !== 0;
+	}
+	const rep = $.NSBitmapImageRep.imageRepWithContentsOfFile(p);
+	if (rep.isNil()) return false;
+	const frames = rep.valueForProperty($.NSImageFrameCount);
+	return !frames.isNil() && frames.js > 1;
+}
+
+// Cuts out the foreground subject (Vision, macOS 14+) and writes it as a
+// transparent PNG. Returns an error message or ''.
+function cutOut(input, output) {
+	const handler = $.VNImageRequestHandler.alloc.initWithURLOptions($.NSURL.fileURLWithPath(input), $({}));
+	const request = $.VNGenerateForegroundInstanceMaskRequest.alloc.init;
+	if (!handler.performRequestsError($([request]), null)) return 'Could not analyse the image';
+	const observation = request.results.firstObject;
+	if (observation.isNil()) return 'No subject found to cut out';
+	const buffer = observation.generateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(
+		observation.allInstances, handler, true, null);
+	if (!buffer) return 'Could not cut out the subject';
+	const rep = $.NSBitmapImageRep.alloc.initWithCIImage($.CIImage.imageWithCVPixelBuffer(buffer));
+	const png = rep.representationUsingTypeProperties($.NSBitmapImageFileTypePNG, $({}));
+	return png.writeToFileAtomically(output, true) ? '' : 'Could not write the cut-out';
+}
+
+// "😂" -> "face with tears of joy"
+function emojiNames(emoji) {
+	if (!emoji) return [];
+	const named = $(emoji).stringByApplyingTransformReverse($.NSStringTransformToUnicodeName, false).js;
+	return (named.match(/\\N\{[^}]+\}/g) || [])
+		.map(n => n.slice(3, -1).toLowerCase())
+		.filter(n => !/^(variation selector|zero width joiner|emoji modifier)/.test(n));
 }
 
 function titleFromFilename(name) {
@@ -350,16 +432,33 @@ function clearSession() {
 	fm.removeItemAtPathError(sessionPath(), null);
 }
 
+// The image as it is now: before any rename, after a cut-out.
 function sessionImage(s) {
-	return s.mode === 'add' ? s.source : `${memesDir()}/${s.file}`;
+	return s.cutout || originalImage(s);
+}
+
+function originalImage(s) {
+	return s.mode === 'add' ? s.source : `${memesDir()}/${s.original}`;
+}
+
+function canCutOut(s) {
+	const p = originalImage(s);
+	return ['png', 'jpg', 'jpeg', 'heic', 'webp'].includes(extOf(p)) && !isAnimated(p);
+}
+
+// Filename the meme will have after saving.
+function finalName(s) {
+	if (s.mode === 'add') return targetName(s);
+	return s.cutout ? s.file.replace(/\.[^.]+$/, '.png') : s.file;
 }
 
 function startSession(paths) {
 	const [first, ...queue] = paths;
 	const dir = realPath(memesDir());
-	const inCollection = realPath(first.replace(/\/[^/]+$/, '')) === dir;
+	const inCollection = realPath(dirname(first)) === dir;
 	const name = basename(first);
-	const entry = loadIndex()[name];
+	const entry = inCollection ? loadIndex()[name] : null;
+	const pack = loadPack(dirname(first));
 	const s = {
 		mode: inCollection ? 'edit' : 'add',
 		guided: !entry,
@@ -375,8 +474,78 @@ function startSession(paths) {
 		},
 		queue,
 	};
+	// stickers start out with their emoji as title and keywords
+	if (pack) {
+		const names = emojiNames(pack.stickers[name]);
+		s.pack = dirname(first);
+		s.values.title = names.join(' ') || s.values.title;
+		s.values.keywords = names;
+		s.values.source = pack.link;
+	}
 	saveSession(s);
 	return s;
+}
+
+function targetExt(s) {
+	if (s.cutout) return 'png';
+	return s.mode === 'add' && isVideo(s.source) ? animatedExt() : extOf(s.file);
+}
+
+// ---------------------------------------------------------------- sticker packs
+
+function loadPack(dir) {
+	const text = readText(`${dir}/pack.json`);
+	return text ? JSON.parse(text) : null;
+}
+
+function packStickers(dir) {
+	const names = fm.contentsOfDirectoryAtPathError(dir, null);
+	if (names.isNil()) return [];
+	return names.js.map(n => n.js).filter(n => isImage(n)).sort(byName).map(n => `${dir}/${n}`);
+}
+
+function stagedPacks() {
+	const names = fm.contentsOfDirectoryAtPathError(stickersDir(), null);
+	if (names.isNil()) return [];
+	return names.js.map(n => `${stickersDir()}/${n.js}`)
+		.map(dir => ({ dir, pack: loadPack(dir), stickers: packStickers(dir) }))
+		.filter(p => p.pack);
+}
+
+function importPack(name) {
+	const dest = `${stickersDir()}/${name}`;
+	const result = JSON.parse(shell(
+		`telegram_token=${shellQuote(env('telegram_token'))} ${shellQuote(workflowDir() + '/src/telegram.zsh')} ${shellQuote(name)} ${shellQuote(dest)}`));
+	if (!result.ok) return next('notify', result.error);
+
+	const skipped = [
+		result.skipped_tgs && `${result.skipped_tgs} Lottie`,
+		result.skipped_video && `${result.skipped_video} video (install ffmpeg)`,
+		result.failed && `${result.failed} failed`,
+	].filter(Boolean);
+	if (!result.added) return next('notify', `Nothing to import from "${result.title}"${skipped.length ? `: skipped ${skipped.join(', ')}` : ''}`);
+	return next('pack', dest);
+}
+
+// Grid of the stickers of a downloaded pack that aren't in the collection yet.
+function packGrid(dir) {
+	const pack = loadPack(dir) || { stickers: {}, title: basename(dir) };
+	const items = packStickers(dir).map(p => {
+		const emoji = pack.stickers[basename(p)] || '';
+		return {
+			uid: p,
+			type: 'file:skipcheck',
+			title: emojiNames(emoji).join(' ') || basename(p),
+			subtitle: `${emoji} ${pack.title} · ↩ add · ⌘↩ add all`,
+			match: `${emojiNames(emoji).join(' ')} ${emoji}`,
+			arg: p,
+			icon: { path: p },
+			quicklookurl: p,
+		};
+	});
+	if (!items.length) items.push({ title: 'All stickers of this pack are in the collection', valid: false });
+	const columns = parseInt(env('grid_columns'), 10) || 5;
+	return JSON.stringify({ alfredworkflow: { arg: scriptFilter(items), config: { columncount: columns } } });
 }
 
 function prefill(s) {
@@ -386,7 +555,7 @@ function prefill(s) {
 		case 'keywords': return v.keywords.length ? v.keywords.join(', ') + ', ' : '';
 		case 'notes': return v.notes.replace(/\n/g, ' ');
 		case 'source': return v.source;
-		case 'filename': return s.file.replace(/\.[^.]+$/, '');
+		case 'filename': return finalName(s).replace(/\.[^.]+$/, '');
 		default: return '';
 	}
 }
@@ -443,6 +612,20 @@ function menu(query) {
 	const items = [];
 	const act = (cmd, extra = {}) => JSON.stringify(Object.assign({ cmd }, extra));
 
+	const link = query.match(STICKER_LINK);
+	if (link) {
+		const hasToken = !!env('telegram_token').trim();
+		return scriptFilter([{
+			title: `Import sticker pack "${link[1]}"`,
+			subtitle: hasToken
+				? `Downloads the stickers, then shows them to pick from${hasTool('ffmpeg') ? '' : ' · video stickers need ffmpeg'}`
+				: 'Set a Telegram bot token in Configure Workflow first (from @BotFather)',
+			arg: act('import', { name: link[1] }),
+			valid: hasToken,
+			icon: icon('add'),
+		}]);
+	}
+
 	if (!query) {
 		const s = loadSession();
 		if (s) {
@@ -468,6 +651,19 @@ function menu(query) {
 			arg: act('add-finder'),
 			icon: icon('add'),
 		});
+		items.push({
+			title: 'Import a Telegram sticker pack',
+			subtitle: 'Paste a t.me/addstickers/… link after the keyword',
+			valid: false,
+			icon: icon('add'),
+		});
+		stagedPacks().forEach(p => items.push({
+			title: `Sticker pack: ${p.pack.title}`,
+			subtitle: `${p.stickers.length} sticker${p.stickers.length === 1 ? '' : 's'} not yet added · ↩ browse · ⌘↩ delete download`,
+			arg: act('pack', { dir: p.dir }),
+			icon: { path: p.stickers[0] || SYSTEM_ICONS + ICONS.add },
+			mods: { cmd: { arg: act('drop-pack', { dir: p.dir }), subtitle: 'Delete the downloaded stickers' } },
+		}));
 		const unannotated = all.filter(m => !m.indexed);
 		if (unannotated.length) {
 			items.push({
@@ -563,8 +759,7 @@ function form(query) {
 		}
 
 		case 'filename': {
-			const ext = extOf(s.file);
-			const name = query.trim() ? `${slug(query)}.${ext}` : s.file;
+			const name = query.trim() ? `${slug(query)}.${targetExt(s)}` : finalName(s);
 			items.push(item({
 				title: `Filename: ${name}`,
 				subtitle: '↩ save · letters, digits and underscores',
@@ -584,7 +779,7 @@ function form(query) {
 			break;
 
 		default: {
-			const fileName = s.mode === 'add' ? targetName(s) : s.file;
+			const fileName = finalName(s);
 			const field = (label, value, step, placeholder) => item({
 				title: `${label}: ${value || placeholder}`,
 				subtitle: `↩ edit ${label.toLowerCase()}`,
@@ -593,7 +788,9 @@ function form(query) {
 			});
 			items.push(item({
 				title: s.mode === 'add' ? `Add "${v.title}" to the collection` : `Save "${v.title}"`,
-				subtitle: `${s.mode === 'add' ? `Copies the file as ${fileName}` : 'Writes the changes to index.yaml'}${queued} · ⇧ preview`,
+				subtitle: `${s.mode === 'edit' ? 'Writes the changes to index.yaml'
+					: isVideo(s.source) ? `Converts it to an animated ${targetExt(s).toUpperCase()} as ${fileName}`
+					: `${s.pack ? 'Moves' : 'Copies'} the file as ${fileName}`}${queued} · ⇧ preview`,
 				arg: act('save'),
 			}));
 			items.push(field('Title', v.title, 'title', '—'));
@@ -601,6 +798,11 @@ function form(query) {
 			items.push(field('Notes', v.notes.replace(/\n/g, ' '), 'notes', '—'));
 			items.push(field('Source', v.source, 'source', '—'));
 			items.push(field('Filename', fileName, 'filename', ''));
+			if (s.cutout) {
+				items.push(item({ title: 'Undo cut-out', subtitle: 'Keep the original background', arg: act('uncut'), icon: icon('cancel') }));
+			} else if (canCutOut(s)) {
+				items.push(item({ title: 'Cut out the subject', subtitle: 'Removes the background, saves a transparent PNG', arg: act('cutout'), icon: icon('cutout') }));
+			}
 			if (s.mode === 'edit' && exists(`${memesDir()}/${s.original}`)) {
 				items.push(item({ title: 'Remove from collection…', subtitle: 'Asks for confirmation', arg: act('step', { step: 'remove' }), icon: icon('remove') }));
 			}
@@ -614,7 +816,7 @@ function form(query) {
 function targetName(s) {
 	if (s.renamed) return s.file;
 	const index = loadIndex();
-	return uniqueName(slug(s.values.title), extOf(s.source), n => exists(`${memesDir()}/${n}`) || n in index);
+	return uniqueName(slug(s.values.title), targetExt(s), n => exists(`${memesDir()}/${n}`) || n in index);
 }
 
 // ---------------------------------------------------------------- actions
@@ -634,6 +836,16 @@ function act(args) {
 	switch (c.cmd) {
 		case 'add-finder':
 			return add(finderSelection());
+
+		case 'import':
+			return importPack(c.name);
+
+		case 'pack':
+			return next('pack', c.dir);
+
+		case 'drop-pack':
+			fm.removeItemAtPathError(c.dir, null);
+			return next('notify', 'Deleted the downloaded stickers');
 
 		case 'annotate':
 			return add(collection().filter(m => !m.indexed).map(m => m.path));
@@ -668,6 +880,21 @@ function act(args) {
 			return showForm(s);
 		}
 
+		case 'cutout': {
+			const out = `${dirname(sessionPath())}/cutout-${Date.now()}.png`;
+			const error = cutOut(originalImage(s), out);
+			if (error) return next('notify', error);
+			s.cutout = out;
+			if (s.renamed) s.file = s.file.replace(/\.[^.]+$/, '.png');
+			return showForm(s);
+		}
+
+		case 'uncut':
+			fm.removeItemAtPathError(s.cutout, null);
+			delete s.cutout;
+			if (s.renamed) s.file = s.file.replace(/\.[^.]+$/, `.${extOf(originalImage(s))}`);
+			return showForm(s);
+
 		case 'save':
 			return save(s);
 
@@ -684,6 +911,7 @@ function act(args) {
 		}
 
 		case 'cancel':
+			if (s && s.cutout) fm.removeItemAtPathError(s.cutout, null);
 			clearSession();
 			return next('none');
 	}
@@ -691,11 +919,19 @@ function act(args) {
 }
 
 function add(paths) {
-	const images = paths.filter(p => p && isImage(p) && exists(p));
-	if (!images.length) {
-		return next('notify', paths.filter(Boolean).length ? 'No supported images selected (PNG, JPG, GIF, WebP, HEIC)' : 'Nothing selected');
+	paths = paths.filter(p => p && exists(p));
+	const videos = paths.filter(isVideo);
+	const usable = paths.filter(p => isImage(p) || (isVideo(p) && hasTool('ffmpeg')));
+	if (!usable.length) {
+		if (videos.length) return next('notify', 'Videos are converted to animated images with ffmpeg: brew install ffmpeg');
+		return next('notify', paths.length ? 'No supported files selected (PNG, JPG, GIF, WebP, HEIC, WebM, MP4, MOV)' : 'Nothing selected');
 	}
-	return showForm(startSession(images));
+	return showForm(startSession(usable));
+}
+
+// ⌘↩ in a sticker pack grid: guide through every remaining sticker of the pack.
+function addAll(path) {
+	return add(packStickers(dirname(path)));
 }
 
 function save(s) {
@@ -706,12 +942,24 @@ function save(s) {
 	if (s.mode === 'add') {
 		name = targetName(s);
 		if (exists(`${dir}/${name}`)) return next('notify', `${name} already exists, pick another filename`);
-		const ok = fm.copyItemAtPathToPathError(s.source, `${dir}/${name}`, null);
-		if (!ok) return next('notify', `Could not copy ${basename(s.source)} into the collection`);
+		if (isVideo(s.source)) {
+			const target = `${dir}/${name.replace(/\.[^.]+$/, '')}`;
+			name = basename(shell(`${shellQuote(workflowDir() + '/src/animate.zsh')} ${shellQuote(s.source)} ${shellQuote(target)}`).trim());
+		} else if (s.cutout || s.pack) {
+			// stickers leave the staging folder once added
+			if (!fm.moveItemAtPathToPathError(s.cutout || s.source, `${dir}/${name}`, null)) return next('notify', `Could not move ${basename(s.source)} into the collection`);
+			if (s.pack && s.cutout) fm.removeItemAtPathError(s.source, null);
+		} else if (!fm.copyItemAtPathToPathError(s.source, `${dir}/${name}`, null)) {
+			return next('notify', `Could not copy ${basename(s.source)} into the collection`);
+		}
 	} else {
-		name = s.file;
-		if (name !== s.original) {
-			if (exists(`${dir}/${name}`)) return next('notify', `${name} already exists, pick another filename`);
+		name = finalName(s);
+		if (name !== s.original && exists(`${dir}/${name}`)) return next('notify', `${name} already exists, pick another filename`);
+		if (s.cutout) {
+			// the original goes to the Trash, so a bad cut-out can be undone
+			fm.trashItemAtURLResultingItemURLError($.NSURL.fileURLWithPath(`${dir}/${s.original}`), null, null);
+			fm.moveItemAtPathToPathError(s.cutout, `${dir}/${name}`, null);
+		} else if (name !== s.original) {
 			fm.moveItemAtPathToPathError(`${dir}/${s.original}`, `${dir}/${name}`, null);
 		}
 	}
@@ -728,11 +976,11 @@ function save(s) {
 	saveIndex(index);
 
 	const message = `${s.mode === 'add' ? 'Added' : 'Saved'} "${s.values.title}"`;
-	if (s.queue.length) {
-		startSession(s.queue);
-		return showForm(loadSession());
-	}
+	const queue = s.queue.filter(exists);
+	if (queue.length) return showForm(startSession(queue));
 	clearSession();
+	// back to the pack to pick the next sticker
+	if (s.pack && packStickers(s.pack).length) return next('pack', s.pack);
 	return next('notify', message);
 }
 
@@ -757,6 +1005,8 @@ function run(argv) {
 			case 'menu': return menu(query.trim());
 			case 'form': return form(query);
 			case 'act': return act(args);
+			case 'pack': return packGrid(query);
+			case 'addall': return addAll(query);
 		}
 		throw new Error(`Unknown command ${command}`);
 	} catch (e) {

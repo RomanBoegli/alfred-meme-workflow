@@ -49,6 +49,12 @@ BirdPerson.png:
   keywords: [rick and morty, bird person, deadpan, serious]
   added: 2026-10-28
 
+blinking_guy.gif:
+  title: Blinking guy
+  keywords: [blink, disbelief, what, huh, surprised, confused, did you just, wtf]
+  notes: Double take at something absurd someone just said.
+  added: 2026-10-28
+
 bored_boy_thinking.webp:
   title: bored boy thinking
   keywords: [bored, thinking, hmm, pondering, skeptical, meh]
@@ -77,6 +83,12 @@ Cereal_Spitting.png:
 Challenge_Accepted.png:
   title: Challenge Accepted
   keywords: [challenge accepted, bring it on, determined, confident]
+  added: 2026-10-28
+
+charlie_conspiracy.jpg:
+  title: Charlie conspiracy board
+  keywords: [conspiracy, explain, chaos, debugging, pepe silvia, crazy, always sunny, connections]
+  notes: Explaining an over-complicated theory, or debugging.
   added: 2026-10-28
 
 Clean_Fuck_Yea.png:
@@ -139,6 +151,12 @@ crow_thinking.webp:
   keywords: [bird, crow, thinking, hmm, pondering, chin]
   added: 2026-10-28
 
+crying_cat_thumbs_up.png:
+  title: Crying cat thumbs up
+  keywords: [sad, okay, thumbs up, coping, cat, crying, fine, sad but ok]
+  notes: Sad, but okay.
+  added: 2026-10-28
+
 dead_inside.png:
   title: dead inside
   keywords: [dead inside, empty, tired, done, exhausted, meh]
@@ -157,6 +175,12 @@ desperate_woman.webp:
 Determined.png:
   title: Determined
   keywords: [game face, determined, focus, serious, challenge]
+  added: 2026-10-28
+
+disaster_girl.jpg:
+  title: Disaster girl
+  keywords: [evil, smile, chaos, fire, guilty, disaster, burn, i did that]
+  notes: Caused the chaos, and enjoying it.
   added: 2026-10-28
 
 disbelieve_cmon.webp:
@@ -314,6 +338,18 @@ Hehehe.png:
   keywords: [hehe, grin, smug, sneaky]
   added: 2026-10-28
 
+hide_the_pain_harold.png:
+  title: Hide the Pain Harold
+  keywords: [pain, fake smile, fine, coping, suffering, awkward, dead inside, harold]
+  notes: Smiling through it.
+  added: 2026-10-28
+
+hide_the_pain_harold_close.jpg:
+  title: Hide the Pain Harold (close-up)
+  keywords: [pain, fake smile, fine, coping, suffering, awkward, dead inside, harold, close up, grin]
+  notes: Smiling through it, up close.
+  added: 2026-10-28
+
 hmm_sceptical.webp:
   title: hmm sceptical
   keywords: [hmm, skeptical, suspicious, doubt]
@@ -327,6 +363,30 @@ horse.webp:
 how_funny.webp:
   title: how funny
   keywords: [rolling floor, laugh, lol, hilarious, rofl]
+  added: 2026-10-28
+
+ight_imma_head_out.png:
+  title: Ight imma head out
+  keywords: [leave, bye, nope, exit, head out, spongebob, im out, done]
+  notes: Leaving a meeting, thread or conversation.
+  added: 2026-10-28
+
+is_this_a_pigeon.jpg:
+  title: Is this a pigeon?
+  keywords: [is this, wrong, misunderstanding, butterfly, pigeon, anime, clueless, confused]
+  notes: Getting something completely wrong with full confidence.
+  added: 2026-10-28
+
+kermit_tea.png:
+  title: Kermit sipping tea
+  keywords: [tea, none of my business, passive aggressive, shade, kermit, sipping, smug]
+  notes: ...but that's none of my business.
+  added: 2026-10-28
+
+kombucha_girl.gif:
+  title: Kombucha girl
+  keywords: [unsure, conflicted, disgust, hmm, not sure, maybe, acquired taste, kombucha]
+  notes: Disgusted, then... actually not bad?
   added: 2026-10-28
 
 laser_eyes.webp:
@@ -362,6 +422,17 @@ Me_Gusta_Derp.png:
 Milk_Big_Eyes.png:
   title: Milk Big Eyes
   keywords: [big, eyes, shocked, milk, spit, surprised]
+  added: 2026-10-28
+
+mocking_spongebob.png:
+  title: Mocking SpongeBob
+  keywords: [mocking, sarcasm, sarcastic, spongebob, chicken, repeat, derp]
+  notes: Repeat what someone said in aLtErNaTiNg CaPs.
+  added: 2026-10-28
+
+monkey_puppet.gif:
+  title: Monkey puppet side glance
+  keywords: [awkward, look away, cringe, oops, side eye, monkey, nervous, pretend not to see]
   added: 2026-10-28
 
 Newspaper_Guy.png:
@@ -412,6 +483,12 @@ Original_Troll.png:
 owl_confused.webp:
   title: owl confused
   keywords: [wide eyes, owl, confused, shocked, stare, bird]
+  added: 2026-10-28
+
+panik_kalm_panik.png:
+  title: Panik Kalm Panik
+  keywords: [panic, calm, relief, panik, kalm, meme man, anxiety, rollercoaster]
+  notes: Problem, relief, bigger problem.
   added: 2026-10-28
 
 Poker_Face.png:
@@ -489,6 +566,11 @@ Serious_No_Kidding_Grumpy.png:
   keywords: [not kidding, serious, grumpy, unimpressed, annoyed]
   added: 2026-10-28
 
+side_eye_chloe.png:
+  title: Side-eyeing Chloe
+  keywords: [side eye, skeptical, judging, doubt, suspicious, really, kid, unimpressed]
+  added: 2026-10-28
+
 spechless_silent.png:
   title: spechless silent
   keywords: [speechless, silent, shocked, blank, stare]
@@ -529,9 +611,21 @@ stick_excited_happy.webp:
   keywords: [excited, happy, yay, cyanide]
   added: 2026-10-28
 
+stonks.png:
+  title: Stonks
+  keywords: [stonks, profit, business, genius, money, stocks, meme man, smart move]
+  notes: A questionable business or money move presented as genius.
+  added: 2026-10-28
+
 stretched_neck_guy_whoa.png:
   title: stretched neck guy whoa
   keywords: [stretch neck, look closer, whoa, wow, computer]
+  added: 2026-10-28
+
+surprised_pikachu.png:
+  title: Surprised Pikachu
+  keywords: [surprised, shocked, predictable, obviously, fake surprise, pikachu, pokemon, who could have guessed]
+  notes: Fake surprise at an entirely predictable outcome.
   added: 2026-10-28
 
 Suspicious_Think_Hmm.png:
@@ -572,6 +666,12 @@ thinking_strong.webp:
 thinking_truly.webp:
   title: thinking truly
   keywords: [american psycho, thinking, hmm, shush]
+  added: 2026-10-28
+
+this_is_fine.png:
+  title: This is fine
+  keywords: [this is fine, fire, chaos, denial, calm, incident, everything is fine, dog, coffee]
+  notes: Everything is burning and you pretend it is not. Production incidents, deadlines.
   added: 2026-10-28
 
 Thoughtful_Think_Hmm.png:
@@ -622,6 +722,11 @@ uuh_nice.webp:
 very_angry_guy_kill.png:
   title: very angry guy kill
   keywords: [rage, strangle, kill, furious]
+  added: 2026-10-28
+
+visible_confusion.jpg:
+  title: Visible confusion
+  keywords: [confused, visible confusion, star wars, obi wan, what, huh]
   added: 2026-10-28
 
 Wait_A_Minute_Hmmm.png:
@@ -707,6 +812,12 @@ wojak_smile_dumb.webp:
 yeah_but_hmm.jpg:
   title: yeah but hmm
   keywords: [well actually, yeah, but, objection, counterpoint]
+  added: 2026-10-28
+
+yes_chad.png:
+  title: Yes Chad
+  keywords: [chad, "yes", confident, based, own it, nordic gamer, wojak, agree]
+  notes: Calmly owning it.
   added: 2026-10-28
 
 yes_please.webp:

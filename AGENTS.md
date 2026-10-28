@@ -6,7 +6,7 @@ Guidance for AI coding agents working in this repository.
 
 Alfred 5.5+ workflow for searching and curating a personal meme collection. The repo root is the workflow folder (`info.plist`, `icon.png`, `src/`) and also the source of truth for the collection (`memes/` with `memes/index.yaml`). `bin/link` symlinks the repo into Alfred for daily use; `bin/build` produces a standalone `memes.alfredworkflow` with the memes bundled.
 
-No dependencies beyond macOS 15+: `/bin/zsh`, `/usr/bin/osascript` (JavaScript for Automation and AppleScriptObjC). Don't introduce Homebrew tools, Python or Node.
+Core features need nothing beyond macOS 15+: `/bin/zsh`, `/usr/bin/osascript` (JavaScript for Automation and AppleScriptObjC), `/usr/bin/jq`, `curl`. `ffmpeg`/`img2webp` are optional and only used for video → animated image (`src/animate.zsh`); everything must keep working without them. Don't introduce Python or Node.
 
 ## Common commands
 
@@ -29,6 +29,8 @@ Set `memes_dir` and `alfred_workflow_cache` to scratch folders when testing acti
 - **Manage**: keyword `{var:manage_keyword}` → Script Filter `memes.js menu`. Universal Action "Add to Memes" and a Hotkey (selection in macOS) pass file paths to `act`.
 - **Guide/form**: `act` (Run Script) updates a session in `$alfred_workflow_cache/session.json` and prints `{"alfredworkflow": {"arg": <prefill>, "variables": {"next": "form" | "notify" | "none"}}}`. A Conditional on `{var:next}` calls the external trigger `form` (which opens the keyword-less Script Filter `memes.js form` with the prefill as query) or posts a notification.
 - Session steps: `title → keywords → notes → source` when guided (new or unannotated files), then `overview`; `filename` and `remove` are reached from the overview.
+- **Sticker packs**: `memes <t.me/addstickers link>` → `act import` runs `src/telegram.zsh`, which downloads into `$alfred_workflow_data/stickers/<pack>/` with a `pack.json` (title, link, emoji per file) and prints a JSON summary. `next: pack` routes to Run Script `memes.js pack <dir>` → a second Grid View (↩ `act` with the sticker path, ⌘ `memes.js addall`). Stickers in a pack folder start a guided session prefilled from their emoji, are moved (not copied) into the collection on save, and saving returns to the pack grid.
+- **Cut-out**: `cutOut()` uses `VNGenerateForegroundInstanceMaskRequest` via the ObjC bridge; the result is a PNG in the cache that replaces the image on save (edit mode trashes the original).
 - `index.yaml` is read and written by a small YAML-subset parser/emitter in `memes.js` (top-level map of filename → fields; scalars, flow/block lists, `|`/`>` blocks). Output is sorted by filename, case-insensitive. Unknown fields are preserved.
 
 ## Conventions
