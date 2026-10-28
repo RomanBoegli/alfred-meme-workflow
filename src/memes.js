@@ -1,7 +1,7 @@
 // Meme collection logic, run with `osascript -l JavaScript src/memes.js <command> [args]`.
 //
 //   grid [query]     items for the Grid View (all memes, optionally pre-filtered)
-//   menu [query]     Script Filter for the `memes` management keyword
+//   menu [query]     Script Filter for the management keyword (`memeadmin`)
 //   form [query]     Script Filter for the add/edit form (reached via the "form" external trigger)
 //   act <json|paths> performs a menu/form action and tells Alfred what to show next
 //
@@ -607,7 +607,7 @@ function gridOutput(items) {
 }
 
 function manageKeyword() {
-	return env('manage_keyword') || 'memes';
+	return env('manage_keyword') || 'memeadmin';
 }
 
 // Shown instead of everything else until a meme folder is chosen.
@@ -698,7 +698,7 @@ function menu(query) {
 
 function form(query) {
 	const s = loadSession();
-	if (!s) return scriptFilter([{ title: 'Nothing to edit', subtitle: 'Start from the "memes" keyword', valid: false }]);
+	if (!s) return scriptFilter([{ title: 'Nothing to edit', subtitle: `Start from the "${manageKeyword()}" keyword`, valid: false }]);
 
 	const v = s.values;
 	const image = sessionImage(s);

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+- The manage keyword is now `memeadmin` (was `memes`), so it is harder to mix up with `meme`. Change it in Configure Workflow if you prefer.
+
 ## 2.0.0
 
 A plain meme browser for your own collection, ready for the Alfred Gallery.

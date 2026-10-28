@@ -19,6 +19,7 @@ memes_dir=$PWD/memes osascript -l JavaScript src/memes.js act '{"cmd":"edit","fi
 osascript -l JavaScript src/memes.js form ''           # current form screen
 ./src/copy.zsh memes/elmo_on_fire.gif                  # clipboard action
 plutil -lint info.plist
+osascript -e 'tell application id "com.runningwithcrayons.Alfred" to reload workflow "ch.romanboegli.memes"'  # after editing info.plist; Alfred doesn't watch the symlinked checkout
 ```
 
 Set `memes_dir` and `alfred_workflow_cache` to scratch folders when testing actions so the real collection is untouched. `osascript` calls `run()` automatically; to call internal functions, rename it first, e.g. `osascript -l JavaScript -e "$(sed 's/^function run(/function _run(/' src/memes.js); stringifyYaml(parseYaml(readText('memes/_index.yml')))"`.
@@ -30,7 +31,7 @@ Set `memes_dir` and `alfred_workflow_cache` to scratch folders when testing acti
 - **Guide/form**: `act` (Run Script) updates a session in `$alfred_workflow_cache/session.json` and prints `{"alfredworkflow": {"arg": <prefill>, "variables": {"next": "form" | "notify" | "none"}}}`. A Conditional on `{var:next}` calls the external trigger `form` (which opens the keyword-less Script Filter `memes.js form` with the prefill as query) or posts a notification.
 - Session steps: `title → keywords → notes → source` when guided (new or unannotated files), then `overview`; `filename` and `remove` are reached from the overview.
 - **Meme folder**: `memesDir()` is `memes_dir` (created if missing), else the legacy data folder, else `''`; then `noFolder()` replaces every screen with "Choose your meme folder", whose `act configure` opens `alfredpreferences://navigateto/workflows>workflow>{uid}>userconfig>memes_dir`.
-- **Starter collection**: `act starter` downloads `memes-starter.zip` from the latest release (`STARTER_URL`, overridable with the `starter_url` env var for tests), copies images the folder doesn't have and adds their index entries if missing. Existing files and entries are never touched. Offered in `memes` (first when the folder is empty).
+- **Starter collection**: `act starter` downloads `memes-starter.zip` from the latest release (`STARTER_URL`, overridable with the `starter_url` env var for tests), copies images the folder doesn't have and adds their index entries if missing. Existing files and entries are never touched. Offered in the manage menu (first when the folder is empty).
 - **Cut-out**: `cutOut()` uses `VNGenerateForegroundInstanceMaskRequest` via the ObjC bridge; the result is a PNG in the cache that replaces the image on save (edit mode trashes the original).
 - **Search**: `search()` ranks memes by `score()`: every query word must match some word of the title (weight 1), keywords (0.9), notes (0.6) or filename/extra fields (0.5); `wordScore()` accepts exact > prefix > substring > 1–2 typos (Damerau-Levenshtein, also against word prefixes). Typing inside the Grid View is Alfred's own exact filter on `match`.
 - No self-update: the Alfred Gallery forbids it. Users install new releases themselves.

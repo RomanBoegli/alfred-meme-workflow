@@ -8,7 +8,7 @@ Requires Alfred 5.5+ with the Powerpack and macOS 15+. Optional: `ffmpeg` to tur
 
 1. **[⬇ Download the latest release](https://github.com/RomanBoegli/alfred-meme-workflow/releases/latest/download/memes.alfredworkflow)** and double-click it.
 2. Alfred asks for your **Meme folder**: point it at the folder with your memes, or at an empty one.
-3. No memes yet? `memes` → **Add the starter collection** adds 160 curated memes with notes. Memes you already have are never overwritten.
+3. No memes yet? `memeadmin` → **Add the starter collection** adds 160 curated memes with notes. Memes you already have are never overwritten.
 
 To update, install the new release the same way. Your memes and their details stay in your folder.
 
@@ -21,10 +21,10 @@ To update, install the new release the same way. Your memes and their details st
 | Find and copy a meme | `meme shocked` → `↩` → pick it → `↩`, then paste. Typos are fine (`meme shokced`) |
 | Preview | `⇧` or `⌘Y` |
 | Reveal in Finder / copy path | `⌘↩` / `⌥↩` |
-| Edit its details | `⌃↩` in the grid, or `memes` → pick it |
-| Remove it | `memes` → select it → `⌘↩` (file goes to the Trash) |
-| Add new memes | Select images or short videos in Finder → `⌥⌘\` → **Add to Memes**, or `memes` → **Add the files selected in Finder** |
-| Annotate files dropped into the folder by hand | `memes` → **Annotate … without details** |
+| Edit its details | `⌃↩` in the grid, or `memeadmin` → pick it |
+| Remove it | `memeadmin` → select it → `⌘↩` (file goes to the Trash) |
+| Add new memes | Select images or short videos in Finder → `⌥⌘\` → **Add to Memes**, or `memeadmin` → **Add the files selected in Finder** |
+| Annotate files dropped into the folder by hand | `memeadmin` → **Annotate … without details** |
 
 Typos are forgiven in the words you type after `meme` before pressing `↩`; typing inside an open grid uses Alfred's own, exact filter.
 
@@ -54,7 +54,7 @@ You can edit it by hand. Extra fields are kept and searchable. Comments other th
 In Alfred, open **Memes** and click *Configure Workflow* to set:
 
 - the meme folder
-- the keywords (`meme`, `memes`)
+- the keywords (`meme`, `memeadmin`)
 - the number of grid columns
 - auto-paste (needs Accessibility permission for Alfred)
 - the animated format: GIF (default, works everywhere) or WebP
