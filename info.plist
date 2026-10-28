@@ -785,128 +785,128 @@ Details live in _index.yml inside the meme folder.
 		<key>02F758FE-39FA-50C5-9411-41CC75A2BA55</key>
 		<dict>
 			<key>xpos</key>
-			<real>700.0</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>10.0</real>
+			<real>10</real>
 		</dict>
 		<key>0C29902E-44C6-5E8D-A60E-BC0BB786E48A</key>
 		<dict>
 			<key>xpos</key>
-			<real>210.0</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>40.0</real>
+			<real>40</real>
 		</dict>
 		<key>2CA1A317-58A5-5AB9-A0A1-2658B8C6308B</key>
 		<dict>
 			<key>xpos</key>
-			<real>30.0</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>800.0</real>
+			<real>800</real>
 		</dict>
 		<key>2D0D3AC4-1DA5-55EC-8B99-7491BECF6779</key>
 		<dict>
 			<key>xpos</key>
-			<real>1130.0</real>
+			<real>1130</real>
 			<key>ypos</key>
-			<real>860.0</real>
+			<real>860</real>
 		</dict>
 		<key>3657F38F-CE62-5F44-8403-CBA87C56BF8B</key>
 		<dict>
 			<key>xpos</key>
-			<real>700.0</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>250.0</real>
+			<real>250</real>
 		</dict>
 		<key>52A04E16-B9BF-5DF2-BBBB-DA543FD763FC</key>
 		<dict>
 			<key>xpos</key>
-			<real>790.0</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>520.0</real>
+			<real>520</real>
 		</dict>
 		<key>56682117-1D42-5BB8-A081-27820F90B516</key>
 		<dict>
 			<key>xpos</key>
-			<real>30.0</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>420.0</real>
+			<real>420</real>
 		</dict>
 		<key>5EB998AE-9C4C-50B4-BACA-7C6B34209248</key>
 		<dict>
 			<key>xpos</key>
-			<real>30.0</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>680.0</real>
+			<real>680</real>
 		</dict>
 		<key>6486CF8C-E8DC-547B-AAE0-6B68BCCF47BF</key>
 		<dict>
 			<key>xpos</key>
-			<real>480.0</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>40.0</real>
+			<real>40</real>
 		</dict>
 		<key>792BBDF6-4BDC-5A73-86C1-AAC653A5EE26</key>
 		<dict>
 			<key>xpos</key>
-			<real>210.0</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>800.0</real>
+			<real>800</real>
 		</dict>
 		<key>876DBB17-3ECB-5C88-8E12-7E663DA89A1B</key>
 		<dict>
 			<key>xpos</key>
-			<real>660.0</real>
+			<real>660</real>
 			<key>ypos</key>
-			<real>590.0</real>
+			<real>590</real>
 		</dict>
 		<key>8A2C5EFC-F342-5324-906C-C0A90A7AA532</key>
 		<dict>
 			<key>xpos</key>
-			<real>960.0</real>
+			<real>960</real>
 			<key>ypos</key>
-			<real>780.0</real>
+			<real>780</real>
 		</dict>
 		<key>8A8F730D-9667-5048-9616-01D9240D2395</key>
 		<dict>
 			<key>xpos</key>
-			<real>480.0</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>560.0</real>
+			<real>560</real>
 		</dict>
 		<key>BAC23A0F-E7E9-5203-ABFE-D3D810B7AF0C</key>
 		<dict>
 			<key>xpos</key>
-			<real>700.0</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>130.0</real>
+			<real>130</real>
 		</dict>
 		<key>C12D9BCD-9AFF-5215-95FA-B3A60EA785D7</key>
 		<dict>
 			<key>xpos</key>
-			<real>790.0</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>780.0</real>
+			<real>780</real>
 		</dict>
 		<key>D7E03655-9BEE-5879-BC1E-054D18FE2FD6</key>
 		<dict>
 			<key>xpos</key>
-			<real>30.0</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>560.0</real>
+			<real>560</real>
 		</dict>
 		<key>D805932E-926B-5C1C-910B-FBDADF131A72</key>
 		<dict>
 			<key>xpos</key>
-			<real>790.0</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>650.0</real>
+			<real>650</real>
 		</dict>
 		<key>F324D1EB-1BA9-50F9-88C5-C443CDA847DD</key>
 		<dict>
 			<key>xpos</key>
-			<real>30.0</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>40.0</real>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
