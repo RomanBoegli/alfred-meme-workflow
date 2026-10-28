@@ -1,0 +1,976 @@
+# Meme collection index. One entry per image file in this folder.
+#
+#   title:     name shown in Alfred
+#   keywords:  words you'd search for: moods, reactions, characters
+#   notes:     optional free text, e.g. when to use it
+#   source:    optional origin (URL)
+#   added:     date it joined the collection
+#
+# Edited by the workflow (`memes` keyword) or by hand. Extra fields are kept,
+# comments other than this header are not.
+
+absolute_disbelieve.webp:
+  title: absolute disbelieve
+  keywords: [no way, shocked, omg, gasp, disbelief, surprised, wow, scream, mouth open, jaw drop, unbelievable]
+  notes: Young man in purple light with his mouth wide open in total shock. For news so absurd you can't believe it.
+  added: 2026-10-28
+
+Angry.png:
+  title: Angry
+  keywords: [rage comic, rage, furious, mad, annoyed, rage face, clenched teeth, pissed]
+  notes: Rage comic face, teeth clenched and veins popping. Building fury about something annoying.
+  added: 2026-10-28
+
+angry_computer.webp:
+  title: angry computer
+  keywords: [rage, throw, computer, smash, pc, broken, furious, it, tech, window, rage quit, hate computers]
+  notes: Rage comic guy throwing his computer out of the window. When tech has pushed you over the edge.
+  added: 2026-10-28
+
+Aww_Yeah.png:
+  title: Aww Yeah
+  keywords: [aww, yeah, "yes", success, happy, celebrate, win, aww yeah, triumph, nailed it, finally]
+  notes: Rage comic guy shouting AAAWWW YEEEAH with eyes closed. Pure triumph when something finally works out.
+  added: 2026-10-28
+
+Aww_Yeah_funny_heavy_laugh_guy.webp:
+  title: Aww Yeah funny heavy laugh guy
+  keywords: [crying laughing, laugh, lol, hilarious, lmao, rofl, tears, hysterical, dying, cant breathe, lmfao]
+  notes: Man in a suit laughing so hard he's crying, head thrown back. For something truly hilarious.
+  added: 2026-10-28
+
+beautiful.webp:
+  title: beautiful
+  keywords: [tears, touched, moved, emotional, crying, joy, wholesome, cute, so beautiful, proud, tears of joy]
+  notes: Rage comic face with big teary eyes and a trembling smile. Moved to tears by something beautiful or wholesome.
+  added: 2026-10-28
+
+Beer_Guy.png:
+  title: Beer Guy
+  keywords: [cereal guy, beer, drink, suspicious, stare, drinking, staring, judging, unimpressed]
+  notes: Cereal guy with a beer, staring blankly. Unimpressed or quietly judging over a drink.
+  added: 2026-10-28
+
+BirdPerson.png:
+  title: BirdPerson
+  keywords: [rick and morty, bird person, deadpan, serious, expressionless, cartoon]
+  notes: Birdperson from Rick and Morty, calm and expressionless. Deadpan, totally serious answer.
+  added: 2026-10-28
+
+blinking_guy.gif:
+  title: Blinking guy
+  keywords: [blink, disbelief, what, huh, surprised, confused, did you just, wtf, double take, did he just, really, white guy blinking]
+  notes: "Animated: man blinks in disbelief and does a double take. When someone says something absurd."
+  added: 2026-10-28
+
+bored_boy_thinking.webp:
+  title: bored boy thinking
+  keywords: [bored, thinking, hmm, pondering, skeptical, meh, unconvinced, hand on chin, boy]
+  notes: Boy with hand on chin looking bored and doubtful. Unconvinced, thinking it over without enthusiasm.
+  added: 2026-10-28
+
+cat_cuddling.webp:
+  title: cat cuddling
+  keywords: [cat, love, cuddle, cute, wholesome, affection, hug, cozy, pet]
+  notes: Man hugging a very content cat, cheek to cheek. Love, affection, cozy and wholesome.
+  added: 2026-10-28
+
+caveman_computer.webp:
+  title: caveman computer
+  keywords: [caveman, stupid, tech, illiterate, confused, computer, smash, dumb, stone age, tech support, boomer, hitting computer]
+  notes: Caveman in a fur loincloth hacking at an old computer with a stone tool. Clueless with technology.
+  added: 2026-10-28
+
+Cereal_Guy.png:
+  title: Cereal Guy
+  keywords: [cereal guy, stare, suspicious, what, eating, cereal, staring, reading]
+  notes: Cereal guy staring over his cereal bowl. Suspicious stare while reading something odd.
+  added: 2026-10-28
+
+Cereal_Spitting.png:
+  title: Cereal Spitting
+  keywords: [spit take, cereal, spit, shocked, surprised, wtf, spit out, what did i just read]
+  notes: Cereal guy spitting out his cereal in shock. For a shocking or ridiculous revelation.
+  added: 2026-10-28
+
+Challenge_Accepted.png:
+  title: Challenge Accepted
+  keywords: [challenge accepted, bring it on, determined, confident, dare, lets do this, accepted]
+  notes: Rage comic guy with a smug smirk under CHALLENGE ACCEPTED. When someone dares you or says it can't be done.
+  added: 2026-10-28
+
+charlie_conspiracy.jpg:
+  title: Charlie conspiracy board
+  keywords: [conspiracy, explain, chaos, debugging, pepe silvia, crazy, always sunny, connections, conspiracy theory, red string, rant, it all makes sense, explaining]
+  notes: Charlie from It's Always Sunny ranting in front of a wall of papers and red string. Explaining a wild theory or a bug nobody else sees.
+  added: 2026-10-28
+
+Clean_Fuck_Yea.png:
+  title: Clean Fuck Yea
+  keywords: [fuck yeah, success, proud, victory, win, satisfied, nailed it]
+  notes: Rage comic FUCK YEA guy, clean version without text. Proud, self-satisfied victory.
+  added: 2026-10-28
+
+cmon_dude.webp:
+  title: cmon dude
+  keywords: [come on, dude, smug, disappointed, seriously]
+  notes: Smug cartoon face with a sideways look. Come on, seriously? Disappointed in someone.
+  added: 2026-10-28
+
+computer_anger.webp:
+  title: computer anger
+  keywords: [rage, bite, laptop, frustrated, angry, computer, it, tech, frustration]
+  notes: Woman with glasses biting her laptop in frustration. When the computer is driving you insane.
+  added: 2026-10-28
+
+computer_guy.png:
+  title: computer guy
+  keywords: [computer, stare, skeptical, reading, meh, suspicious, screen, unimpressed, internet]
+  notes: Rage comic guy at his computer, unimpressed stare at the screen. Reading something dumb online.
+  added: 2026-10-28
+
+computer_guy_facepalm.png:
+  title: computer guy facepalm
+  keywords: [facepalm, computer, desperate, fail, bug, error, face in hands, despair]
+  notes: Rage comic guy with his face in his hands in front of the computer. Facepalm at a bug, a fail or a dumb message.
+  added: 2026-10-28
+
+computer_not_working.webp:
+  title: computer not working
+  keywords: [not working, confused, why, broken, bug, wtf, tech, it, baffled, laptop]
+  notes: "Confused guy at his laptop with an open hand: why isn't this working? Baffled by broken tech."
+  added: 2026-10-28
+
+Concentrated.png:
+  title: Concentrated
+  keywords: [focus, concentrate, tongue, effort, trying, trying hard]
+  notes: Rage comic face concentrating hard, tongue sticking out. Trying really hard to focus.
+  added: 2026-10-28
+
+confused-travolta.gif:
+  title: confused travolta
+  keywords: [confused, lost, where, looking, around, nothing, travolta, pulp fiction, where is everyone, looking around]
+  notes: "Animated: John Travolta from Pulp Fiction looking around confused, transparent background. Lost, looking for something or someone that isn't there."
+  added: 2026-10-28
+
+crazy_man_laughing.webp:
+  title: crazy man laughing
+  keywords: [laugh, crazy, insane, hysterical, lol, madness, losing it, mad laughter]
+  notes: Man with glasses holding his head and laughing hysterically. Losing it, laughing at madness.
+  added: 2026-10-28
+
+crow_amazed.webp:
+  title: crow amazed
+  keywords: [wide eyes, bird, crow, amazed, shocked, stare, starstruck]
+  notes: Crow looking up with wide, shiny eyes. Amazed, starstruck or shocked.
+  added: 2026-10-28
+
+crow_angry.webp:
+  title: crow angry
+  keywords: [side eye, bird, crow, angry, stare, judging]
+  notes: Crow close-up giving an angry side eye. Judging you silently.
+  added: 2026-10-28
+
+crow_thinking.webp:
+  title: crow thinking
+  keywords: [bird, crow, thinking, hmm, pondering, chin, hand on chin]
+  notes: Crow with a human hand on its chin, thinking. Pondering or skeptical.
+  added: 2026-10-28
+
+crying_cat_thumbs_up.png:
+  title: Crying cat thumbs up
+  keywords: [sad, okay, thumbs up, coping, cat, crying, fine, sad but ok, crying cat, sad thumbs up, its fine, teary]
+  notes: Teary-eyed cat giving a thumbs up, cut out on transparent background. Sad, but okay. Coping.
+  added: 2026-10-28
+
+dead_inside.png:
+  title: dead inside
+  keywords: [dead inside, empty, tired, done, exhausted, meh, numb, monday]
+  notes: Simple face with dot eyes and a flat mouth. Completely empty, exhausted, nothing left.
+  added: 2026-10-28
+
+Derrrp.png:
+  title: Derrrp
+  keywords: [derp, stupid, dumb, drool, silly, dumb mistake]
+  notes: Rage comic derp face with crossed eyes and drool. Stupid, silly mistake.
+  added: 2026-10-28
+
+desperate_woman.webp:
+  title: desperate woman
+  keywords: [desperate, nervous, anxious, stressed, scared, panic, stress, terrified]
+  notes: Woman with hands on her cheeks, anxious and terrified. Panic, stress, nervous breakdown.
+  added: 2026-10-28
+
+Determined.png:
+  title: Determined
+  keywords: [game face, determined, focus, serious, challenge, focused]
+  notes: Rage comic face with furrowed brow, determined. Game face on, focused and serious.
+  added: 2026-10-28
+
+disaster_girl.jpg:
+  title: Disaster girl
+  keywords: [evil, smile, chaos, fire, guilty, disaster, burn, i did that, evil grin, arson, burning house]
+  notes: Little girl smirking at the camera in front of a burning house. Caused the chaos and enjoying it.
+  added: 2026-10-28
+
+disbelieve_cmon.webp:
+  title: disbelieve cmon
+  keywords: [come on, facepalm, picard, disbelief, seriously, embarrassed, star trek, embarrassing, cringe]
+  notes: Captain Picard (Star Trek) facepalm. Embarrassed for someone, can't believe what just happened.
+  added: 2026-10-28
+
+dog_so_beautiful.png:
+  title: dog so beautiful
+  keywords: [adventure time, jake dog, beautiful, amazing, wow, wholesome, jake, so beautiful, cartoon]
+  notes: "Jake the dog (Adventure Time) with sparkling eyes: IT'S SO BEAUTIFUL! Overwhelmed by something wonderful."
+  added: 2026-10-28
+
+dont_like_it.webp:
+  title: dont like it
+  keywords: [dislike, disgust, angry, grumpy, nope, pissed, scowl, disgusted, "no"]
+  notes: Man scowling with a grumpy, disgusted face. Don't like it at all.
+  added: 2026-10-28
+
+drake_does_like.png:
+  title: drake does like
+  keywords: [drake, "yes", approve, like, prefer, good, yes this, pointing]
+  notes: Drake pointing and smiling approvingly. Yes, this one. Second half of the Drake format.
+  added: 2026-10-28
+
+drake_does_not_like.webp:
+  title: drake does not like
+  keywords: [drake, "no", reject, dislike, nope, disapprove, no thanks]
+  notes: Drake turning away with his hand up. No thanks, reject. First half of the Drake format.
+  added: 2026-10-28
+
+dude.webp:
+  title: dude
+  keywords: [dude, bro, what, disbelief, cartoon]
+  notes: Grey cartoon face with bulging eyes saying DUDE. Dude, what? Disbelief at a friend.
+  added: 2026-10-28
+
+Dude_Come_On.png:
+  title: Dude Come On
+  keywords: [come on, dude, unimpressed, skeptical, seriously, raised eyebrow]
+  notes: Rage comic face with skeptical raised eyebrow. Dude, come on. Unimpressed.
+  added: 2026-10-28
+
+elmo_on_fire.gif:
+  title: elmo on fire
+  keywords: [everything is fine, fire, chaos, burn, hell, evil, elmo, destruction, hellfire, burn it all]
+  notes: "Animated: Elmo with arms raised in front of hellfire. Chaos, everything is burning, evil mode."
+  added: 2026-10-28
+
+EWBTE_Nice_Good.png:
+  title: EWBTE Nice Good
+  keywords: [thumbs up, nice, good, approve, ok, good job]
+  notes: Rage comic face smiling with a thumbs up. Nice, good, approved.
+  added: 2026-10-28
+
+Excited_Troll.png:
+  title: Excited Troll
+  keywords: [troll, excited, crazy, happy, hyped]
+  notes: Troll face with wild bloodshot eyes and huge grin. Crazy excited, hyped.
+  added: 2026-10-28
+
+extreme_big_smile.png:
+  title: extreme big smile
+  keywords: [smile, grin, creepy, happy, troll, creepy smile]
+  notes: Troll-like face with an enormous creepy grin. Overly happy, suspicious grin.
+  added: 2026-10-28
+
+Fap_Fap_Fab.png:
+  title: Fap Fap Fab
+  keywords: [fap, excited, crude]
+  notes: "Rage comic fap face with FAP FAP FAP. Crude: overly excited about something."
+  added: 2026-10-28
+
+feels_good.webp:
+  title: feels good
+  keywords: [feels good, relief, satisfied, bliss, nice, relaxed, feels good man]
+  notes: Shirtless man with eyes closed, hands together, blissful. That feeling of relief and satisfaction.
+  added: 2026-10-28
+
+Feels_Good_Nice.png:
+  title: Feels Good Nice
+  keywords: [feels good, relief, satisfied, bliss, nice, feels good man]
+  notes: Rage comic feels-good guy with hands on his face, eyes closed. Bliss and relief.
+  added: 2026-10-28
+
+fish.webp:
+  title: fish
+  keywords: [spongebob, fish, shocked, stare, surprised, stunned, speechless]
+  notes: Spongebob fish staring with big eyes. Stunned, staring in silence.
+  added: 2026-10-28
+
+Forever_Alone.png:
+  title: Forever Alone
+  keywords: [forever alone, sad, lonely, crying, single, alone, nobody came]
+  notes: Forever Alone face crying, with the caption. Lonely, nobody showed up, single.
+  added: 2026-10-28
+
+Forever_Alone_Excited.png:
+  title: Forever Alone Excited
+  keywords: [forever alone, excited, happy, lonely, desperate, hopeful]
+  notes: Forever Alone face grinning wildly. Excited about something lonely, or desperately hopeful.
+  added: 2026-10-28
+
+Fuck_Yea.png:
+  title: Fuck Yea
+  keywords: [fuck yeah, success, proud, victory, win, satisfied, nailed it]
+  notes: Rage comic FUCK YEA guy with the red caption. Victory, success, pride.
+  added: 2026-10-28
+
+Fuck_Yea_Female.png:
+  title: Fuck Yea Female
+  keywords: [fuck yeah, woman, success, proud, satisfied, victory]
+  notes: Female version of the FUCK YEA face. Proud and satisfied.
+  added: 2026-10-28
+
+Full_Panel_very_angry.png:
+  title: Full Panel very angry
+  keywords: [rage, furious, fffuuu, extreme, angry, screaming, maximum rage]
+  notes: Full-panel rage face, screaming red-eyed FFFUUU. Maximum fury.
+  added: 2026-10-28
+
+funny_how_dare_you.webp:
+  title: funny how dare you
+  keywords: [how dare you, laugh, mock, offended, sarcastic, mock offense, laughing, cheeky]
+  notes: Sketched man laughing with a hand on his chest. How dare you! Mock offense, or laughing at something cheeky.
+  added: 2026-10-28
+
+giggling.webp:
+  title: giggling
+  keywords: [giggle, laugh, hehe, lol, funny, giggling, laughing]
+  notes: Man laughing while eating a sandwich. Can't stop giggling.
+  added: 2026-10-28
+
+giggling_2.webp:
+  title: giggling 2
+  keywords: [giggle, laugh, hehe, embarrassed, funny, giggling, trying not to laugh, woman]
+  notes: Woman hiding her laugh behind her hand. Trying not to laugh, embarrassed giggle.
+  added: 2026-10-28
+
+grin_face.webp:
+  title: grin face
+  keywords: [grin, troll, smug, evil, smile, gotcha, sneaky]
+  notes: Troll face with a wide smug grin. Gotcha, smug and sneaky.
+  added: 2026-10-28
+
+happy-face-meme.png:
+  title: happy face meme
+  keywords: [happy, smile, grin, cheeky]
+  notes: Rage comic face with a cheeky open grin. Happy and a bit mischievous.
+  added: 2026-10-28
+
+happy_clap_yeah.webp:
+  title: happy clap yeah
+  keywords: [clap, yay, applause, happy, celebrate, well done]
+  notes: Little stick figure clapping happily. Yay, applause, celebration.
+  added: 2026-10-28
+
+Happy_Nice.png:
+  title: Happy Nice
+  keywords: [happy, excited, joy, nice, delighted]
+  notes: Rage comic face with a huge happy open-mouth smile. Excited, delighted.
+  added: 2026-10-28
+
+Happy_Smile.png:
+  title: Happy Smile
+  keywords: [happy, smile, content, pleased, all good]
+  notes: Rage comic face with a gentle content smile. Pleased, content, all good.
+  added: 2026-10-28
+
+heavy_decision_guy.webp:
+  title: heavy decision guy
+  keywords: [tough decision, sweating, nervous, stress, pressure, dilemma, tough choice, two buttons]
+  notes: Cartoon guy sweating and wiping his forehead. Tough decision, nervous, under pressure.
+  added: 2026-10-28
+
+hehe_yea_going_great.webp:
+  title: hehe yea going great
+  keywords: [rubbing hands, robbie rotten, evil plan, scheming, great, hehe, lazytown, going great]
+  notes: Robbie Rotten (LazyTown) rubbing his hands with an evil grin. Scheming, the plan is going great.
+  added: 2026-10-28
+
+Hehehe.png:
+  title: Hehehe
+  keywords: [hehe, grin, smug, sneaky, sly, smirk]
+  notes: Rage comic face with a sly smirk. Hehe, sneaky little laugh.
+  added: 2026-10-28
+
+hide_the_pain_harold.png:
+  title: Hide the Pain Harold
+  keywords: [pain, fake smile, fine, coping, suffering, awkward, dead inside, harold, laptop, office, pained smile, its fine]
+  notes: Harold at his laptop holding a mug, with a pained smile, cut out. Smiling through the pain at work.
+  added: 2026-10-28
+
+hide_the_pain_harold_close.jpg:
+  title: Hide the Pain Harold (close-up)
+  keywords: [pain, fake smile, fine, coping, suffering, awkward, dead inside, harold, close up, grin, pained smile, forced smile]
+  notes: Close-up of Harold's face with his pained, forced smile. Smiling through it.
+  added: 2026-10-28
+
+hmm_sceptical.webp:
+  title: hmm sceptical
+  keywords: [hmm, skeptical, suspicious, doubt, squint, not convinced]
+  notes: Rage comic face, one eye squinting, skeptical hmm. Not convinced.
+  added: 2026-10-28
+
+horse.webp:
+  title: horse
+  keywords: [horse, laugh, lol, teeth, silly, grin, goofy, silly grin, animal]
+  notes: Horse showing its teeth in a big goofy grin. Silly laugh, horsing around.
+  added: 2026-10-28
+
+how_funny.webp:
+  title: how funny
+  keywords: [rolling floor, laugh, lol, hilarious, rofl, rolling on floor, laughing]
+  notes: Sketched guy rolling on the floor laughing, pounding the ground. ROFL.
+  added: 2026-10-28
+
+ight_imma_head_out.png:
+  title: Ight imma head out
+  keywords: [leave, bye, nope, exit, head out, spongebob, im out, done, leaving, meeting]
+  notes: SpongeBob getting up from his armchair to leave. Ight, imma head out. Leaving a meeting or conversation.
+  added: 2026-10-28
+
+is_this_a_pigeon.jpg:
+  title: Is this a pigeon?
+  keywords: [is this, wrong, misunderstanding, butterfly, pigeon, anime, clueless, confused, misidentify]
+  notes: "Anime guy pointing at a butterfly: is this a pigeon? Confidently misidentifying something."
+  added: 2026-10-28
+
+kermit_tea.png:
+  title: Kermit sipping tea
+  keywords: [tea, none of my business, passive aggressive, shade, kermit, sipping, smug, lipton]
+  notes: Kermit the Frog sipping Lipton tea, cut out. But that's none of my business. Passive-aggressive remark.
+  added: 2026-10-28
+
+kombucha_girl.gif:
+  title: Kombucha girl
+  keywords: [unsure, conflicted, disgust, hmm, not sure, maybe, acquired taste, kombucha, grimace, reconsider, not bad]
+  notes: "Animated: woman tastes kombucha, grimaces, then reconsiders. Unsure whether you like something."
+  added: 2026-10-28
+
+laser_eyes.webp:
+  title: laser eyes
+  keywords: [laser, eyes, evil, power, intense, laser eyes, powered up, glowing eyes]
+  notes: Man glaring with glowing laser eyes. Intense, powered up, focused fury.
+  added: 2026-10-28
+
+Laughing_Bitch_Please.png:
+  title: Laughing Bitch Please
+  keywords: [bitch please, yao ming, laugh, lol, dismissive, ridiculous]
+  notes: "Yao Ming laughing: bitch please. Dismissive laughter at a ridiculous claim."
+  added: 2026-10-28
+
+laughing_dog.webp:
+  title: laughing dog
+  keywords: [dog, laugh, evil, lol, evil laugh, girl, animal]
+  notes: German shepherd snarling-laughing next to a smiling little girl. Evil laugh.
+  added: 2026-10-28
+
+laughing_evil.webp:
+  title: laughing evil
+  keywords: [dr evil, laugh, villain, group, lol, mocking, austin powers, group laugh, villains]
+  notes: Dr. Evil and his henchmen laughing together (Austin Powers). Group evil laughter, mocking.
+  added: 2026-10-28
+
+laughing_men.webp:
+  title: laughing men
+  keywords: [laugh, lol, group, mocking, businessmen, group laugh, suits, office]
+  notes: Group of businessmen in suits laughing. Everyone laughing at you, or at a joke.
+  added: 2026-10-28
+
+Me_Gusta_Derp.png:
+  title: Me Gusta Derp
+  keywords: [me gusta, like, creepy, pleased, i like it]
+  notes: Me Gusta face. Creepily pleased, I like this weird thing.
+  added: 2026-10-28
+
+Milk_Big_Eyes.png:
+  title: Milk Big Eyes
+  keywords: [big, eyes, shocked, milk, spit, surprised, big eyes, wide eyes, what did i see]
+  notes: Rage comic face with huge bloodshot eyes and milk dripping. Shocked, wide-eyed, what did I just see?
+  added: 2026-10-28
+
+mocking_spongebob.png:
+  title: Mocking SpongeBob
+  keywords: [mocking, sarcasm, sarcastic, spongebob, chicken, repeat, derp, chicken pose, alternating caps, repeat back]
+  notes: SpongeBob bent over like a chicken with a derpy face, cut out. Mocking someone by repeating their words in aLtErNaTiNg CaPs.
+  added: 2026-10-28
+
+monkey_puppet.gif:
+  title: Monkey puppet side glance
+  keywords: [awkward, look away, cringe, oops, side eye, monkey, nervous, pretend not to see, puppet, glance, avoid eye contact, yikes]
+  notes: "Animated: monkey puppet glances sideways, then nervously looks away. Awkward moment, pretending you saw nothing."
+  added: 2026-10-28
+
+Newspaper_Guy.png:
+  title: Newspaper Guy
+  keywords: [newspaper, reading, unimpressed, wtf, meh, news]
+  notes: Rage comic guy lowering his newspaper with an unimpressed look. Reading something ridiculous.
+  added: 2026-10-28
+
+no_clue_whats_going_on.webp:
+  title: no clue whats going on
+  keywords: [no idea, shrug, dunno, clueless, confused, no clue, suit]
+  notes: Man in a suit shrugging with arms wide. No clue what's going on.
+  added: 2026-10-28
+
+no_idea_what_to_do.webp:
+  title: no idea what to do
+  keywords: [no idea, shrug, dunno, clueless, confused, helpless, dexter]
+  notes: Man in a striped shirt shrugging with both hands out. No idea what to do.
+  added: 2026-10-28
+
+oh_no_please.webp:
+  title: oh no please
+  keywords: ["no", please, stop, nope, reject, refuse, hands up, no please, make it stop]
+  notes: Man holding up both hands defensively with a pained face. Oh no, please, stop!
+  added: 2026-10-28
+
+oh_stop_it.webp:
+  title: oh stop it
+  keywords: [oh stop it, blush, flattered, you, compliment, shy]
+  notes: "Blushing rage comic face: Oh stop it, you. Flattered by a compliment."
+  added: 2026-10-28
+
+Okay_Face_Sad_No_Okay.png:
+  title: Okay Face Sad No Okay
+  keywords: [okay, sad, resigned, disappointed, accept, okay guy]
+  notes: Okay guy, sad and resigned, without caption. Accepting bad news.
+  added: 2026-10-28
+
+Okay_Face_Sad_Okay.png:
+  title: Okay Face Sad Okay
+  keywords: [okay, sad, resigned, disappointed, accept, okay guy]
+  notes: Okay guy, sad and resigned, with the Okay caption. Accepting bad news.
+  added: 2026-10-28
+
+old_angry_man.webp:
+  title: old angry man
+  keywords: [angry, old, man, grumpy, pointing, scolding, old man, top hat]
+  notes: Old man in a top hat and glasses pointing angrily. Scolding, back in my day.
+  added: 2026-10-28
+
+Original_Troll.png:
+  title: Original Troll
+  keywords: [troll face, trolling, problem, gotcha, u mad]
+  notes: Classic troll face. Problem? Trolling someone.
+  added: 2026-10-28
+
+owl_confused.webp:
+  title: owl confused
+  keywords: [wide eyes, owl, confused, shocked, stare, bird, wait what]
+  notes: Owl staring with huge round eyes. Confused, shocked, wait what?
+  added: 2026-10-28
+
+panik_kalm_panik.png:
+  title: Panik Kalm Panik
+  keywords: [panic, calm, relief, panik, kalm, meme man, anxiety, rollercoaster, bigger problem]
+  notes: "Meme Man in three panels: panik, kalm, panik. Problem, relief, then a bigger problem."
+  added: 2026-10-28
+
+Poker_Face.png:
+  title: Poker Face
+  keywords: [poker face, expressionless, neutral, blank, straight face, hiding feelings]
+  notes: Poker face with the red caption. Hiding your feelings, keeping a straight face.
+  added: 2026-10-28
+
+Prrrr_Weird_Tongue.png:
+  title: Prrrr Weird Tongue
+  keywords: [tongue, silly, derp, prrr, weird, raspberry, tongue out]
+  notes: Rage comic face blowing a raspberry. Silly, weird, prrrr.
+  added: 2026-10-28
+
+Rage_Fuck_Angry.png:
+  title: Rage Fuck Angry
+  keywords: [rage, fffuuu, furious, angry, screaming, rage face]
+  notes: Rage face screaming FFFUUU (clean). Furious about something.
+  added: 2026-10-28
+
+Rage_Fuck_Angry_Original.png:
+  title: Rage Fuck Angry Original
+  keywords: [rage, fffuuu, furious, angry, screaming, rage face]
+  notes: Original rage comic with FFFFFUUUUU text. Furious.
+  added: 2026-10-28
+
+raven_angry.webp:
+  title: raven angry
+  keywords: [side eye, bird, raven, angry, stare, judging]
+  notes: Raven close-up with an angry side-eye. Judging you.
+  added: 2026-10-28
+
+raven_disbelieve.webp:
+  title: raven disbelieve
+  keywords: [wide eyes, bird, raven, shocked, disbelief, stare]
+  notes: Raven looking up with wide glowing eyes. Disbelief, shocked.
+  added: 2026-10-28
+
+raven_knife.webp:
+  title: raven knife
+  keywords: [bird, raven, knife, threat, violence, stab, stabby]
+  notes: Raven holding a knife in its beak. Threatening, violent intent, don't mess with me.
+  added: 2026-10-28
+
+raven_thinking.webp:
+  title: raven thinking
+  keywords: [bird, raven, thinking, hmm, pondering, chin, hand on chin]
+  notes: Raven with a human hand on its chin, thinking. Pondering.
+  added: 2026-10-28
+
+really_boy.webp:
+  title: really boy
+  keywords: [side eye, really, skeptical, doubt, suspicious, kid]
+  notes: Third-world success kid giving a skeptical side look. Really? Doubtful.
+  added: 2026-10-28
+
+really_dont_trust_my_eyes.webp:
+  title: really dont trust my eyes
+  keywords: [really, disbelief, glasses, what, wtf, sunglasses, cant believe my eyes]
+  notes: Rage comic man lowering his sunglasses in disbelief. Really? Can't believe my eyes.
+  added: 2026-10-28
+
+recommended.png:
+  title: recommended
+  keywords: [thumbs up, recommended, stamp, approve, endorse, recommend, approved]
+  notes: Red RECOMMENDED stamp with a thumbs up. Strongly recommend this.
+  added: 2026-10-28
+
+recursive_hulk_hogan_recursion.png:
+  title: recursive hulk hogan recursion
+  keywords: [infinite loop, hulk hogan, recursion, recursive, meta, programming]
+  notes: Hulk Hogan's face with recursive mustache. Recursion, infinite loop, meta.
+  added: 2026-10-28
+
+reported.webp:
+  title: reported
+  keywords: [reported, snitch, tattletale, report, notebook]
+  notes: "Cartoon kid writing in a notebook: REPORTED! Snitching, reporting someone."
+  added: 2026-10-28
+
+schrute_angry.gif:
+  title: schrute angry
+  keywords: [the office, dwight, angry, rage, furious, schrute]
+  notes: "Animated: Dwight Schrute (The Office) furious, teeth clenched. Office rage."
+  added: 2026-10-28
+
+Serious_No_Kidding_Grumpy.png:
+  title: Serious No Kidding Grumpy
+  keywords: [not kidding, serious, grumpy, unimpressed, annoyed, not amused]
+  notes: Rage comic face with half-closed eyes, grumpy and serious. Not kidding, not amused.
+  added: 2026-10-28
+
+side_eye_chloe.png:
+  title: Side-eyeing Chloe
+  keywords: [side eye, skeptical, judging, doubt, suspicious, really, kid, unimpressed, chloe, girl]
+  notes: Little girl in a car seat giving a skeptical side-eye, cut out. Unconvinced and suspicious.
+  added: 2026-10-28
+
+spechless_silent.png:
+  title: spechless silent
+  keywords: [speechless, silent, shocked, blank, stare, stick figure]
+  notes: Stick figure with round eyes and a flat mouth. Speechless, nothing to say.
+  added: 2026-10-28
+
+speechless_neutral.png:
+  title: speechless neutral
+  keywords: [poker face, speechless, neutral, blank]
+  notes: Poker face with a flat mouth, no caption. Speechless, unimpressed neutral.
+  added: 2026-10-28
+
+spongebob_caveman.webp:
+  title: spongebob caveman
+  keywords: [spongebob, caveman, primitive, dumb, mocking]
+  notes: Primitive caveman SpongeBob hunched over. Dumb, primitive, back to basics.
+  added: 2026-10-28
+
+spongebob_eager.webp:
+  title: spongebob eager
+  keywords: [spongebob, squidward, eager, excited, curious, tell me more]
+  notes: SpongeBob and Squidward leaning in eagerly. Curious, can't wait to hear more.
+  added: 2026-10-28
+
+steveo_giggle.webp:
+  title: steveo giggle
+  keywords: [laugh, giggle, grin, funny, steve o, jackass]
+  notes: Steve-O grinning and giggling. Amused, mischievous laugh.
+  added: 2026-10-28
+
+stick_cool_yeah.webp:
+  title: stick cool yeah
+  keywords: [cool, wink, pointing, yeah, nice, cyanide, cyanide and happiness, nice one]
+  notes: Cyanide & Happiness character winking and pointing. Cool, nice one, yeah!
+  added: 2026-10-28
+
+stick_disgust.webp:
+  title: stick disgust
+  keywords: [disgust, eww, gross, yuck, cyanide, cyanide and happiness]
+  notes: Cyanide & Happiness character grimacing in disgust. Eww, gross.
+  added: 2026-10-28
+
+stick_excited_happy.webp:
+  title: stick excited happy
+  keywords: [excited, happy, yay, cyanide, cyanide and happiness]
+  notes: Cyanide & Happiness character grinning with joy. Excited, yay!
+  added: 2026-10-28
+
+stonks.png:
+  title: Stonks
+  keywords: [stonks, profit, business, genius, money, stocks, meme man, smart move, investing, arrow up]
+  notes: "Meme Man in a suit next to a rising arrow: stonks. A questionable business move presented as genius."
+  added: 2026-10-28
+
+stretched_neck_guy_whoa.png:
+  title: stretched neck guy whoa
+  keywords: [stretch neck, look closer, whoa, wow, computer, lean in, screen, interesting]
+  notes: Stick figure stretching its neck from the chair to the screen. Whoa, leaning in to look closer.
+  added: 2026-10-28
+
+surprised_pikachu.png:
+  title: Surprised Pikachu
+  keywords: [surprised, shocked, predictable, obviously, fake surprise, pikachu, pokemon, who could have guessed]
+  notes: Surprised Pikachu with an open mouth, transparent. Fake shock at an obvious, predictable outcome.
+  added: 2026-10-28
+
+Suspicious_Think_Hmm.png:
+  title: Suspicious Think Hmm
+  keywords: [suspicious, hmm, skeptical, thinking, chin, narrow eyes, hand on chin]
+  notes: Rage comic face with narrowed eyes and hand on chin. Suspicious, hmm.
+  added: 2026-10-28
+
+Suspicious_Think_Hmm_Arms_crossed.png:
+  title: Suspicious Think Hmm Arms crossed
+  keywords: [suspicious, hmm, skeptical, challenge, doubt, arms crossed]
+  notes: Challenge-accepted face with narrowed eyes and arms crossed. Skeptical, doubting.
+  added: 2026-10-28
+
+theoffice_cmon.webp:
+  title: theoffice cmon
+  keywords: [the office, come on, jim, smug, unimpressed, look at camera, really]
+  notes: Jim Halpert (The Office) with a smug pursed-lips look at the camera. Come on, really?
+  added: 2026-10-28
+
+theoffice_ups.webp:
+  title: theoffice ups
+  keywords: [michael scott, the office, oops, cringe, awkward, awkward grin]
+  notes: Michael Scott (The Office) with an awkward cringing grin. Oops, awkward.
+  added: 2026-10-28
+
+think_man.webp:
+  title: think man
+  keywords: [think about it, roll safe, tap head, smart, clever, logic]
+  notes: Roll Safe tapping his temple. Can't fail if you don't try. Galaxy-brained logic.
+  added: 2026-10-28
+
+thinking_really.webp:
+  title: thinking really
+  keywords: [thinking, hmm, suspicious, really, hand on chin]
+  notes: Rage comic face with a hand on chin and side glance. Really? Thinking about it suspiciously.
+  added: 2026-10-28
+
+thinking_strong.webp:
+  title: thinking strong
+  keywords: [thinking, smug, pepe, intense, hmm, intense thinking]
+  notes: Smug Pepe with hand on chin and speed lines. Intense, smug thinking.
+  added: 2026-10-28
+
+thinking_truly.webp:
+  title: thinking truly
+  keywords: [american psycho, thinking, hmm, shush, patrick bateman, shh, considering]
+  notes: Patrick Bateman (American Psycho) with finger on lips, thinking. Considering, shh.
+  added: 2026-10-28
+
+this_is_fine.png:
+  title: This is fine
+  keywords: [this is fine, fire, chaos, denial, calm, incident, everything is fine, dog, coffee, burning room, deadline]
+  notes: Cartoon dog sitting with coffee in a burning room. This is fine. Calm denial during a disaster.
+  added: 2026-10-28
+
+Thoughtful_Think_Hmm.png:
+  title: Thoughtful Think Hmm
+  keywords: [thinking, hmm, pondering, curious, thoughtful, hand on chin]
+  notes: Rage comic face looking up with hand on chin. Thoughtful, pondering.
+  added: 2026-10-28
+
+thumbs_up_boy_good.webp:
+  title: thumbs up boy good
+  keywords: [thumbs up, good, approve, ok, nice, boy, good job, approved]
+  notes: Boy in a white shirt giving a thumbs up. Good job, approved.
+  added: 2026-10-28
+
+thumbs_up_light.webp:
+  title: thumbs up light
+  keywords: [thumbs up, idea, approve, bright, sunglasses, great idea]
+  notes: Cartoon guy with sunglasses giving a glowing thumbs up. Great idea, bright.
+  added: 2026-10-28
+
+told_you.webp:
+  title: told you
+  keywords: [told you so, i knew it, shocked, yelling, shouting, jersey shore]
+  notes: Pauly D shouting with his hand out. I told you so!
+  added: 2026-10-28
+
+Troll_Dad_Full.png:
+  title: Troll Dad Full
+  keywords: [troll dad, gentleman, monocle, pipe, top hat, fancy]
+  notes: Troll dad with top hat, pipe and monocle. Fancy trolling, gentleman troll.
+  added: 2026-10-28
+
+Troll_Dad_Jump.png:
+  title: Troll Dad Jump
+  keywords: [troll dad, dance, jump, happy, celebrate]
+  notes: Troll dad doing a happy jump. Celebrating a successful troll.
+  added: 2026-10-28
+
+two_guys_wondering.webp:
+  title: two guys wondering
+  keywords: [thinking, wondering, skeptical, hmm, pondering, two guys, tuxedo, puzzled]
+  notes: Mel Gibson and Vince Vaughn in tuxedos, hand on chin, wondering. Puzzled, considering.
+  added: 2026-10-28
+
+ups.webp:
+  title: ups
+  keywords: [hand over mouth, uh oh, oops, shocked, mistake]
+  notes: Bald man with his hand over his mouth, eyes wide. Oops, uh oh, I made a mistake.
+  added: 2026-10-28
+
+uuh_nice.webp:
+  title: uuh nice
+  keywords: [american psycho, nice, impressed, approve, patrick bateman, very nice]
+  notes: "Patrick Bateman (American Psycho) impressed: uuh, nice. Impressed by something."
+  added: 2026-10-28
+
+very_angry_guy_kill.png:
+  title: very angry guy kill
+  keywords: [rage, strangle, kill, furious, bloodshot]
+  notes: Rage comic guy reaching out to strangle, bloodshot eyes. So angry I could kill.
+  added: 2026-10-28
+
+visible_confusion.jpg:
+  title: Visible confusion
+  keywords: [confused, visible confusion, star wars, obi wan, what, huh]
+  notes: Obi-Wan Kenobi frowning with the caption [visible confusion]. Utterly confused.
+  added: 2026-10-28
+
+Wait_A_Minute_Hmmm.png:
+  title: Wait A Minute Hmmm
+  keywords: [wait a minute, hmm, realization, suspicious, suspicion]
+  notes: Rage comic face with a sideways glance. Wait a minute... realization, suspicion.
+  added: 2026-10-28
+
+What_Bitch.png:
+  title: What Bitch
+  keywords: [what, huh, confused, wtf, say what]
+  notes: Man in black and white with a confused WTF face. What?!
+  added: 2026-10-28
+
+Why_With_Hands_Cmon.png:
+  title: Why With Hands Cmon
+  keywords: [come on, why, frustrated, desperate, hands up]
+  notes: "Rage comic face throwing its hands up: why?! Frustrated, come on."
+  added: 2026-10-28
+
+wojak_big_brain_sitting.png:
+  title: wojak big brain sitting
+  keywords: [galaxy brain, big brain, genius, smart, wojak, throne]
+  notes: Wojak sitting on a giant brain throne. Galaxy brain, big brain idea.
+  added: 2026-10-28
+
+wojak_big_brain_surfing.png:
+  title: wojak big brain surfing
+  keywords: [galaxy brain, big brain, genius, smart, wojak, surfing]
+  notes: Wojak surfing on a giant brain through space. Galaxy brain, enlightened.
+  added: 2026-10-28
+
+wojak_chillin.webp:
+  title: wojak chillin
+  keywords: [chill, relaxed, stoned, high, dumb, wojak]
+  notes: Wojak with long hair, drooling and chill. Stoned, relaxed, not a care.
+  added: 2026-10-28
+
+wojak_dumb.webp:
+  title: wojak dumb
+  keywords: [dumb, stupid, derp, wojak, clueless]
+  notes: Wojak with a dumb blank expression. Clueless, stupid.
+  added: 2026-10-28
+
+wojak_dumb_brain.webp:
+  title: wojak dumb brain
+  keywords: [small brain, dumb, stupid, derp, wojak, smooth brain]
+  notes: Wojak with a tiny pointy head and drool. Smooth brain, dumb.
+  added: 2026-10-28
+
+wojak_friendly_smile.webp:
+  title: wojak friendly smile
+  keywords: [smile, friendly, happy, cheerful, wojak]
+  notes: Wojak with a friendly, cheerful smile. Happy and friendly.
+  added: 2026-10-28
+
+wojak_helicopter.webp:
+  title: wojak helicopter
+  keywords: [dumb, idiot, stupid, derp, helicopter, wojak, pepe, drool]
+  notes: Drooling wojak with a propeller and a little Pepe helicopter. Dumb and happy.
+  added: 2026-10-28
+
+wojak_homosapiens_thinking.webp:
+  title: wojak homosapiens thinking
+  keywords: [caveman, neanderthal, dumb, primitive, wojak]
+  notes: Neanderthal wojak with heavy brow, drooling. Primitive thinking.
+  added: 2026-10-28
+
+wojak_nerd.webp:
+  title: wojak nerd
+  keywords: [nerd, soyjak, glasses, wojak, well actually]
+  notes: Nerd wojak with glasses and red hair. Nerd, actually...
+  added: 2026-10-28
+
+wojak_nerd_cry.webp:
+  title: wojak nerd cry
+  keywords: [nerd, cry, soyjak, triggered, upset, wojak, crying, seething]
+  notes: Nerd wojak with glasses crying and gritting teeth. Triggered, seething.
+  added: 2026-10-28
+
+wojak_senior_nerd.webp:
+  title: wojak senior nerd
+  keywords: [senior, nerd, glasses, experienced, expert, wojak, beard]
+  notes: Older bearded wojak with glasses. Senior nerd, seasoned expert.
+  added: 2026-10-28
+
+wojak_small_brain.webp:
+  title: wojak small brain
+  keywords: [small brain, dumb, stupid, wojak, dumb idea]
+  notes: Wojak with a tiny pointed head. Small brain, dumb idea.
+  added: 2026-10-28
+
+wojak_smile_dumb.webp:
+  title: wojak smile dumb
+  keywords: [dumb, smile, stupid, derp, happy, wojak, dumb smile, ignorant, drool]
+  notes: Wojak with a big dumb drooling smile. Blissfully ignorant.
+  added: 2026-10-28
+
+yeah_but_hmm.jpg:
+  title: yeah but hmm
+  keywords: [well actually, yeah, but, objection, counterpoint, hesitate]
+  notes: "Two-panel stick figure: raising a finger, then hesitating. Yeah, but... well actually."
+  added: 2026-10-28
+
+yes_chad.png:
+  title: Yes Chad
+  keywords: [chad, "yes", confident, based, own it, nordic gamer, wojak, agree]
+  notes: Nordic gamer Chad wojak in profile saying Yes., transparent. Calmly owning it.
+  added: 2026-10-28
+
+yes_please.webp:
+  title: yes please
+  keywords: [yes please, smug, approve, greedy, eager, smug grin, want]
+  notes: Asian man with glasses and a smug, eager grin. Yes please, I want that.
+  added: 2026-10-28
+
+Yuno_Cmon.png:
+  title: Yuno Cmon
+  keywords: [y u no, why, frustrated, angry]
+  notes: Y U NO guy with hands up. Why you no do this?! Frustrated.
+  added: 2026-10-28

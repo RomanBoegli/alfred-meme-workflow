@@ -17,4 +17,4 @@ cp -R icon.png README.md CHANGELOG.md LICENSE src memes "$stage/"
 rm -f "$out"
 (cd "$stage" && zip -qr -X - . -x '*.DS_Store') > "$out"
 
-echo "Built $out (v$version, $(ls memes | grep -vc '\.yaml$') memes)"
+echo "Built $out (v$version, $(ls memes | grep -vc '^_') memes)"

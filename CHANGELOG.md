@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0
+
+- Fuzzy search: `meme shokced` still finds shocked memes; results are ranked by relevance (title, then keywords, then notes).
+- Animated memes are marked with ▶︎ in the grid and match "animated".
+- Video imports become GIF by default (animated WebP doesn't play in PowerPoint); WebP is a setting.
+- Every meme has a description of what's in the picture and when to use it.
+- The index is now `memes/_index.yml` (sorts first); an existing `index.yaml` is renamed automatically.
+
 ## 2.1.0
 
 - Import Telegram sticker packs: paste a `t.me/addstickers/…` link after `memes`, pick stickers from a grid. Emoji become the starting title and keywords.

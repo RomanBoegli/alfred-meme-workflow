@@ -2,7 +2,7 @@
 
 Find a meme by name or mood in an [Alfred](https://www.alfredapp.com) thumbnail grid and paste it anywhere. Add, annotate and remove memes without leaving Alfred.
 
-Requires Alfred 5.5+ with the Powerpack and macOS 15+. Optional: `ffmpeg` (plus `img2webp` from `webp`) to turn videos and Telegram video stickers into animated memes: `brew install ffmpeg webp`.
+Requires Alfred 5.5+ with the Powerpack and macOS 15+. Optional: `ffmpeg` to turn videos and Telegram video stickers into animated memes (`brew install ffmpeg gifsicle`).
 
 ## Install
 
@@ -26,7 +26,7 @@ Then disable any older meme workflow that uses the `meme` keyword.
 
 | To… | Do |
 |---|---|
-| Find and copy a meme | `meme` or `meme shocked` → pick it → `↩`, then paste |
+| Find and copy a meme | `meme shocked` → `↩` → pick it → `↩`, then paste. Typos are fine (`meme shokced`) |
 | Preview | `⇧` or `⌘Y` |
 | Reveal in Finder / copy path | `⌘↩` / `⌥↩` |
 | Edit its details | `⌃↩` in the grid, or `memes` → pick it |
@@ -35,21 +35,23 @@ Then disable any older meme workflow that uses the `meme` keyword.
 | Import a Telegram sticker pack | `memes https://t.me/addstickers/<pack>` → ↩, then pick stickers from the grid (`↩` one, `⌘↩` all) |
 | Annotate files dropped into `memes/` by hand | `memes` → **Annotate … without details** |
 
+Typos are forgiven in the words you type after `meme` before pressing `↩`; typing inside an open grid uses Alfred's own, exact filter.
+
 Adding walks you through **title → keywords → notes → source**, then shows an overview where you can still change anything (including the filename) before saving. Keywords are comma-separated; `⇥` completes one already in use. The overview also offers **Cut out the subject**, which removes the background with macOS's built-in subject detection and saves a transparent PNG.
 
-Videos (WebM, MP4, MOV) become animated WebP, or GIF without `img2webp`, with transparency kept. Telegram stickers start with their emoji as title and keywords (😂 → "face with tears of joy"); Lottie (`.tgs`) stickers are skipped. Importing needs a bot token: message [@BotFather](https://t.me/BotFather), send `/newbot`, and paste the token into *Configure Workflow*.
+Animated memes are marked with ▶︎ in the grid. Videos (WebM, MP4, MOV) become animated GIFs with transparency kept, because animated WebP doesn't play in PowerPoint; switch to WebP in *Configure Workflow* if you prefer (needs `img2webp`). Telegram stickers start with their emoji as title and keywords (😂 → "face with tears of joy"); Lottie (`.tgs`) stickers are skipped. Importing needs a bot token: message [@BotFather](https://t.me/BotFather), send `/newbot`, and paste the token into *Configure Workflow*.
 
 Copying puts the file *and* PNG image data on the clipboard, so pasting works in Slack and Mail as well as browsers and web apps. GIFs stay animated and WebP is converted.
 
 ## The index
 
-Each meme's details live in [`memes/index.yaml`](memes/index.yaml):
+Each meme's details live in [`memes/_index.yml`](memes/_index.yml). Search looks at the title, keywords and notes, so a good note (what's in the picture, when to use it) is what makes a meme findable:
 
 ```yaml
 elmo_on_fire.gif:
   title: elmo on fire
   keywords: [everything is fine, fire, chaos, elmo]
-  notes: For production incidents.
+  notes: Animated: Elmo with arms raised in front of hellfire. Chaos, everything is burning.
   source: https://giphy.com/...
   added: 2026-10-28
 ```
@@ -63,6 +65,7 @@ In Alfred, open **Memes** and click *Configure Workflow* to set:
 - the keywords (`meme`, `memes`)
 - the number of grid columns
 - auto-paste (needs Accessibility permission for Alfred)
+- the animated format: GIF (default, works everywhere) or WebP
 - the meme folder (empty means the folder next to the workflow)
 - the Telegram bot token, for sticker imports (stored locally by Alfred, never committed)
 
@@ -76,7 +79,7 @@ To add memes with a hotkey, set one on the workflow's **Hotkey** trigger.
 | `src/memes.js` | Grid, management menu, add/edit guide, YAML index |
 | `src/copy.zsh`, `src/copy.applescript` | Clipboard and auto-paste |
 | `src/telegram.zsh` | Downloads a sticker pack via the Bot API |
-| `src/animate.zsh` | Video → animated WebP/GIF with transparency |
+| `src/animate.zsh` | Video → animated GIF/WebP with transparency |
 | `bin/build`, `bin/link` | Package / link into Alfred |
 
 A linked repo gets your hotkey written into `info.plist`. Keep it out of commits with:

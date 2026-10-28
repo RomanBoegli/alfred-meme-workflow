@@ -1,7 +1,8 @@
 #!/bin/zsh
 # Converts a video (e.g. a Telegram .webm sticker) into an animated image and
-# keeps its transparency: animated WebP when img2webp is installed, else GIF.
-# Needs ffmpeg. Prints the path of the file it wrote.
+# keeps its transparency: GIF by default, animated WebP with animated_format=webp
+# (needs img2webp). Needs ffmpeg; gifsicle, if installed, shrinks GIFs.
+# Prints the path of the file it wrote.
 #
 #   animate.zsh <input> <output path without extension>
 
@@ -30,7 +31,7 @@ if (( ${fps%/*} > 30 * ${fps#*/} )); then
   fps=30/1
 fi
 
-if command -v img2webp >/dev/null; then
+if [[ $animated_format == webp ]] && command -v img2webp >/dev/null; then
   frames=$(mktemp -d)
   trap 'rm -rf "$frames"' EXIT
   ffmpeg -v error $decoder -i "$input" -t 10 -an -vf "$filters" -pix_fmt rgba "$frames/%04d.png"
@@ -40,5 +41,6 @@ else
   ffmpeg -v error -y $decoder -i "$input" -t 10 -an \
     -filter_complex "[0:v]$filters,split[a][b];[a]palettegen=reserve_transparent=1[p];[b][p]paletteuse=alpha_threshold=128" \
     -loop 0 "$output.gif"
+  command -v gifsicle >/dev/null && gifsicle -b -O3 --lossy=40 "$output.gif" 2>/dev/null
   echo "$output.gif"
 fi

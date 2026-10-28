@@ -5,7 +5,7 @@
 //   form [query]     Script Filter for the add/edit form (reached via the "form" external trigger)
 //   act <json|paths> performs a menu/form action and tells Alfred what to show next
 //
-// The collection is a folder of images plus `index.yaml`. The form session
+// The collection is a folder of images plus `_index.yml`. The form session
 // (which file is being edited and the values entered so far) lives in the
 // workflow cache folder between Alfred invocations.
 
@@ -20,6 +20,7 @@ const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'heic'];
 const VIDEO_EXT = ['webm', 'mp4', 'mov', 'm4v'];
 const TOOL_DIRS = ['/opt/homebrew/bin', '/usr/local/bin', '/usr/bin'];
 const STICKER_LINK = /(?:t\.me\/addstickers\/|addstickers\?set=)([A-Za-z0-9_]+)/;
+const INDEX_FILE = '_index.yml';
 const FIELDS = ['title', 'keywords', 'notes', 'source', 'added'];
 const GUIDED_STEPS = ['title', 'keywords', 'notes', 'source'];
 const SYSTEM_ICONS = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/';
@@ -75,7 +76,12 @@ function memesDir() {
 }
 
 function indexPath() {
-	return memesDir() + '/index.yaml';
+	const dir = memesDir();
+	// collections from before 2.2 used index.yaml
+	if (!exists(`${dir}/${INDEX_FILE}`) && exists(`${dir}/index.yaml`)) {
+		fm.moveItemAtPathToPathError(`${dir}/index.yaml`, `${dir}/${INDEX_FILE}`, null);
+	}
+	return `${dir}/${INDEX_FILE}`;
 }
 
 function sessionPath() {
@@ -123,8 +129,9 @@ function hasTool(name) {
 }
 
 // Format video stickers and clips are converted to, see src/animate.zsh.
+// GIF by default: animated WebP doesn't play in PowerPoint and other Office apps.
 function animatedExt() {
-	return hasTool('img2webp') ? 'webp' : 'gif';
+	return env('animated_format') === 'webp' && hasTool('img2webp') ? 'webp' : 'gif';
 }
 
 function shell(command) {
@@ -158,6 +165,7 @@ function isAnimated(p) {
 		head.closeFile;
 		return raw.slice(12, 16) === 'VP8X' && (raw.charCodeAt(20) & 0x02) !== 0;
 	}
+	if (extOf(p) !== 'gif') return false;
 	const rep = $.NSBitmapImageRep.imageRepWithContentsOfFile(p);
 	if (rep.isNil()) return false;
 	const frames = rep.valueForProperty($.NSImageFrameCount);
@@ -229,14 +237,75 @@ function words(...parts) {
 	return parts.flat().join(' ').toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
 }
 
-// Every query word must be the start of some word of the entry.
-function matches(query, haystack) {
-	const hay = words(haystack);
-	return words(query).every(q => hay.some(w => w.startsWith(q)));
+// Edit distance where swapping two neighbouring letters counts as one edit.
+function editDistance(a, b) {
+	const d = [];
+	for (let i = 0; i <= a.length; i++) d[i] = [i];
+	for (let j = 0; j <= b.length; j++) d[0][j] = j;
+	for (let i = 1; i <= a.length; i++) {
+		for (let j = 1; j <= b.length; j++) {
+			const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+			d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+			if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+		}
+	}
+	return d[a.length][b.length];
+}
+
+// How well a query word matches a word of the meme, from 1 (same word) to 0.
+// Tolerates one typo in words of 4+ letters and two in words of 7+, also
+// while the word is still being typed ("shokc" finds "shocked").
+function wordScore(q, w) {
+	if (w === q) return 1;
+	if (w.startsWith(q)) return 0.9;
+	if (q.length >= 3 && w.includes(q)) return 0.6;
+	const allowed = q.length >= 7 ? 2 : q.length >= 4 ? 1 : 0;
+	if (!allowed) return 0;
+	const whole = editDistance(q, w);
+	if (whole <= allowed) return 0.7 - 0.15 * whole;
+	let start = Infinity;
+	for (let n = q.length - 1; n <= q.length + 1; n++) {
+		if (n < w.length) start = Math.min(start, editDistance(q, w.slice(0, n)));
+	}
+	return start <= allowed ? 0.5 - 0.15 * start : 0;
+}
+
+const FIELD_WEIGHTS = { title: 1, keywords: 0.9, notes: 0.6, other: 0.5 };
+
+// Relevance of a meme for a query, 0 if some query word matches nothing.
+function score(query, m) {
+	const fields = {
+		title: words(m.title),
+		keywords: words(m.keywords),
+		notes: words(m.notes),
+		other: words(m.extra, m.name, m.animated ? 'animated' : ''),
+	};
+	let total = 0;
+	for (const q of words(query)) {
+		let best = 0;
+		for (const [field, list] of Object.entries(fields)) {
+			for (const w of list) best = Math.max(best, FIELD_WEIGHTS[field] * wordScore(q, w));
+		}
+		if (!best) return 0;
+		total += best;
+	}
+	// whole phrase in the title or a keyword ranks first
+	const phrase = query.toLowerCase().trim();
+	if ([m.title, ...m.keywords].some(t => t.toLowerCase().includes(phrase))) total += 1;
+	return total;
+}
+
+// Memes matching the query, best first; all memes for an empty query.
+function search(query, all) {
+	if (!query.trim()) return all;
+	return all.map(m => ({ m, s: score(query, m) }))
+		.filter(r => r.s > 0)
+		.sort((a, b) => b.s - a.s || byName(a.m.title, b.m.title))
+		.map(r => r.m);
 }
 
 // ---------------------------------------------------------------- YAML subset
-// Reads and writes the shape of index.yaml: a top-level map of filename ->
+// Reads and writes the shape of _index.yml: a top-level map of filename ->
 // map of fields, where values are plain/quoted scalars, flow lists [a, b],
 // block lists (- a) or literal blocks (|).
 
@@ -291,7 +360,7 @@ function yamlKey(line) {
 		rest = line.slice(i + 1).replace(/^\s*:/, '');
 	} else {
 		const m = line.match(/^(.*?):(\s|$)(.*)$/);
-		if (!m) throw new Error(`index.yaml: cannot parse "${line}"`);
+		if (!m) throw new Error(`_index.yml: cannot parse "${line}"`);
 		key = m[1].trim();
 		rest = m[3];
 	}
@@ -320,7 +389,7 @@ function parseYaml(text) {
 			entry = out[yamlKey(line)[0]] = {};
 			field = null;
 		} else if (!entry) {
-			throw new Error(`index.yaml: unexpected indentation in "${line}"`);
+			throw new Error(`_index.yml: unexpected indentation in "${line}"`);
 		} else if (line.startsWith('- ') || line === '-') {
 			if (!Array.isArray(entry[field])) entry[field] = [];
 			entry[field].push(yamlUnquote(stripComment(line.slice(1))));
@@ -390,13 +459,19 @@ function collection(index = loadIndex()) {
 			title: e.title || titleFromFilename(name),
 			keywords: Array.isArray(e.keywords) ? e.keywords : parseKeywords(e.keywords || ''),
 			notes: e.notes || '',
+			animated: isAnimated(`${memesDir()}/${name}`),
 			extra: Object.keys(e).filter(k => !FIELDS.includes(k)).map(k => [].concat(e[k]).join(' ')),
 		};
 	});
 }
 
 function haystack(m) {
-	return [m.title, m.keywords, m.notes, m.extra, m.name];
+	return [m.title, m.keywords, m.notes, m.extra, m.name, m.animated ? 'animated' : ''];
+}
+
+// Grid thumbnails don't move, so animated memes get a marker.
+function displayTitle(m) {
+	return m.animated ? `▶︎ ${m.title}` : m.title;
 }
 
 function allKeywords(index) {
@@ -515,7 +590,7 @@ function stagedPacks() {
 function importPack(name) {
 	const dest = `${stickersDir()}/${name}`;
 	const result = JSON.parse(shell(
-		`telegram_token=${shellQuote(env('telegram_token'))} ${shellQuote(workflowDir() + '/src/telegram.zsh')} ${shellQuote(name)} ${shellQuote(dest)}`));
+		`animated_format=${animatedExt()} telegram_token=${shellQuote(env('telegram_token'))} ${shellQuote(workflowDir() + '/src/telegram.zsh')} ${shellQuote(name)} ${shellQuote(dest)}`));
 	if (!result.ok) return next('notify', result.error);
 
 	const skipped = [
@@ -578,13 +653,12 @@ function showForm(s) {
 // ---------------------------------------------------------------- grid
 
 function grid(query) {
-	const items = collection()
-		.filter(m => !query || matches(query, haystack(m)))
+	const items = search(query, collection())
 		.map(m => ({
 			uid: m.name,
 			type: 'file:skipcheck',
-			title: m.title,
-			subtitle: m.indexed ? m.keywords.join(', ') : 'not annotated · ⌃↩ to add details',
+			title: displayTitle(m),
+			subtitle: (m.animated ? 'Animated · ' : '') + (m.indexed ? m.notes || m.keywords.join(', ') : 'not annotated · ⌃↩ to add details'),
 			match: words(haystack(m)).join(' '),
 			arg: m.path,
 			icon: { path: m.path },
@@ -684,9 +758,9 @@ function menu(query) {
 		}
 	}
 
-	all.filter(m => !query || matches(query, haystack(m))).forEach(m => items.push({
+	search(query, all).forEach(m => items.push({
 		uid: m.name,
-		title: m.title,
+		title: displayTitle(m),
 		subtitle: `Edit · ${m.indexed ? m.keywords.join(', ') : 'not annotated'}`,
 		arg: act('edit', { file: m.name }),
 		icon: { path: m.path },
@@ -788,7 +862,7 @@ function form(query) {
 			});
 			items.push(item({
 				title: s.mode === 'add' ? `Add "${v.title}" to the collection` : `Save "${v.title}"`,
-				subtitle: `${s.mode === 'edit' ? 'Writes the changes to index.yaml'
+				subtitle: `${s.mode === 'edit' ? 'Writes the changes to _index.yml'
 					: isVideo(s.source) ? `Converts it to an animated ${targetExt(s).toUpperCase()} as ${fileName}`
 					: `${s.pack ? 'Moves' : 'Copies'} the file as ${fileName}`}${queued} · ⇧ preview`,
 				arg: act('save'),
@@ -944,7 +1018,7 @@ function save(s) {
 		if (exists(`${dir}/${name}`)) return next('notify', `${name} already exists, pick another filename`);
 		if (isVideo(s.source)) {
 			const target = `${dir}/${name.replace(/\.[^.]+$/, '')}`;
-			name = basename(shell(`${shellQuote(workflowDir() + '/src/animate.zsh')} ${shellQuote(s.source)} ${shellQuote(target)}`).trim());
+			name = basename(shell(`animated_format=${animatedExt()} ${shellQuote(workflowDir() + '/src/animate.zsh')} ${shellQuote(s.source)} ${shellQuote(target)}`).trim());
 		} else if (s.cutout || s.pack) {
 			// stickers leave the staging folder once added
 			if (!fm.moveItemAtPathToPathError(s.cutout || s.source, `${dir}/${name}`, null)) return next('notify', `Could not move ${basename(s.source)} into the collection`);

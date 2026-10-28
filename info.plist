@@ -767,7 +767,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>meme [query]   Grid of all memes. Type to filter by title, keywords or notes.
+	<string>meme [query]   Grid of all memes. The query after the keyword is typo-tolerant and ranked; typing inside the grid filters further.
   ↩   copy the meme (file + image data)
   ⌘↩  reveal in Finder
   ⌥↩  copy the file path
@@ -776,9 +776,9 @@
 
 memes [query]  Manage the collection: add the Finder selection, import a Telegram sticker pack (paste a t.me/addstickers/… link), annotate memes without details, edit or remove (⌘↩) a meme.
 
-Add images or short videos from Finder with the "Add to Memes" Universal Action, or set a hotkey on the Hotkey trigger. Videos and animated stickers become animated WebP (needs ffmpeg). A short guide asks for title, keywords, notes and source.
+Add images or short videos from Finder with the "Add to Memes" Universal Action, or set a hotkey on the Hotkey trigger. Videos and animated stickers become animated GIFs (needs ffmpeg). Animated memes show ▶︎ in the grid. A short guide asks for title, keywords, notes and source.
 
-Details live in index.yaml inside the meme folder.
+Details live in _index.yml inside the meme folder.
 </string>
 	<key>uidata</key>
 	<dict>
@@ -997,6 +997,32 @@ Details live in index.yaml inside the meme folder.
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>gif</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>GIF (works everywhere, incl. PowerPoint)</string>
+						<string>gif</string>
+					</array>
+					<array>
+						<string>WebP (smoother edges, smaller)</string>
+						<string>webp</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Format for converted videos and Telegram video stickers. WebP needs img2webp (brew install webp).</string>
+			<key>label</key>
+			<string>Animated format</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>animated_format</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string></string>
 				<key>filtermode</key>
 				<integer>1</integer>
@@ -1039,7 +1065,7 @@ Details live in index.yaml inside the meme folder.
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.1.0</string>
+	<string>2.2.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/RomanBoegli/alfred-meme-workflow</string>
 </dict>
