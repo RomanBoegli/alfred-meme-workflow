@@ -4,7 +4,7 @@ Guidance for AI coding agents working in this repository.
 
 ## What this is
 
-Alfred 5.5+ workflow for searching and curating a personal meme collection. The repo root is the workflow folder (`info.plist`, `icon.png`, `src/`) and also the source of truth for the collection (`memes/` with `memes/_index.yml`). `bin/link` symlinks the repo into Alfred for daily use; `bin/build` produces a standalone `memes.alfredworkflow` with the memes bundled.
+Alfred 5.5+ workflow for searching and curating a personal meme collection. The repo root is the workflow folder (`info.plist`, `icon.png`, `src/`) and also the source of truth for the collection (`memes/` with `memes/_index.yml`). `bin/link` symlinks the repo into Alfred for daily use; `bin/build` produces a standalone `memes.alfredworkflow` with the memes bundled; pushing a `v*` tag (see `bin/release`) makes `.github/workflows/release.yml` publish it as a GitHub release. Installed copies (no `.git` next to `info.plist`) seed `$alfred_workflow_data/memes` from the bundled memes once and use that, so the collection survives updates.
 
 Core features need nothing beyond macOS 15+: `/bin/zsh`, `/usr/bin/osascript` (JavaScript for Automation and AppleScriptObjC), `/usr/bin/jq`, `curl`. `ffmpeg` (plus optional `gifsicle`, `img2webp`) is only used for video → animated image (`src/animate.zsh`); everything must keep working without them. Don't introduce Python or Node.
 

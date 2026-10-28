@@ -6,21 +6,23 @@ Requires Alfred 5.5+ with the Powerpack and macOS 15+. Optional: `ffmpeg` to tur
 
 ## Install
 
-**Linked to this repo** (recommended if you curate the collection):
+**[⬇ Download the latest release](https://github.com/RomanBoegli/alfred-meme-workflow/releases/latest/download/memes.alfredworkflow)** and double-click it. Alfred imports it with 160+ annotated memes to start with.
+
+Or from the terminal:
 
 ```sh
-bin/link            # undo with: bin/link --unlink
+curl -fsSL -o /tmp/memes.alfredworkflow https://github.com/RomanBoegli/alfred-meme-workflow/releases/latest/download/memes.alfredworkflow && open /tmp/memes.alfredworkflow
 ```
 
-Alfred uses the repo directly, so memes you add or edit land in `memes/`, ready to commit.
+To update, install the new release the same way; your memes and their details are kept. They live in Alfred's workflow data folder (`~/Library/Application Support/Alfred/Workflow Data/ch.romanboegli.memes/memes`), or in any folder you pick as **Meme folder** in *Configure Workflow*.
 
-**Standalone** (memes bundled, e.g. for another Mac):
+**Curating the collection in this repo** (maintainers):
 
 ```sh
-bin/build && open memes.alfredworkflow
+bin/link            # Alfred runs straight from the checkout; undo with: bin/link --unlink
 ```
 
-Then disable any older meme workflow that uses the `meme` keyword.
+Memes you add or edit then land in `memes/`, ready to commit.
 
 ## Use
 
@@ -66,7 +68,7 @@ In Alfred, open **Memes** and click *Configure Workflow* to set:
 - the number of grid columns
 - auto-paste (needs Accessibility permission for Alfred)
 - the animated format: GIF (default, works everywhere) or WebP
-- the meme folder (empty means the folder next to the workflow)
+- the meme folder (empty means Alfred's workflow data folder, or `memes/` in a linked checkout)
 - the Telegram bot token, for sticker imports (stored locally by Alfred, never committed)
 
 To add memes with a hotkey, set one on the workflow's **Hotkey** trigger.
@@ -80,7 +82,17 @@ To add memes with a hotkey, set one on the workflow's **Hotkey** trigger.
 | `src/copy.zsh`, `src/copy.applescript` | Clipboard and auto-paste |
 | `src/telegram.zsh` | Downloads a sticker pack via the Bot API |
 | `src/animate.zsh` | Video → animated GIF/WebP with transparency |
-| `bin/build`, `bin/link` | Package / link into Alfred |
+| `bin/build`, `bin/link`, `bin/release` | Package, link into Alfred, tag a release |
+| `.github/workflows/release.yml` | Publishes `memes.alfredworkflow` for each `v*` tag |
+
+### Releasing
+
+Add a `## x.y.z` section to `CHANGELOG.md`, then:
+
+```sh
+bin/release x.y.z                       # sets the version in info.plist, commits, tags
+git push && git push origin vx.y.z      # GitHub Actions builds and publishes the release
+```
 
 A linked repo gets your hotkey written into `info.plist`. Keep it out of commits with:
 

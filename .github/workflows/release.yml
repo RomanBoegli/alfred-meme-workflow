@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches info.plist version
+        run: |
+          version=$(/usr/libexec/PlistBuddy -c 'Print :version' info.plist)
+          [[ "v$version" == "$GITHUB_REF_NAME" ]] || { echo "::error::Tag $GITHUB_REF_NAME does not match info.plist version $version"; exit 1; }
+
+      - name: Build
+        run: bin/build
+
+      - name: Release notes from CHANGELOG.md
+        run: |
+          awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## " v "$" {on=1; next} /^## / {on=0} on' CHANGELOG.md > notes.md
+          cat notes.md
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" memes.alfredworkflow --title "$GITHUB_REF_NAME" --notes-file notes.md

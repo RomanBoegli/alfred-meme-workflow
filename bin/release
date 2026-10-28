@@ -1,0 +1,20 @@
+#!/bin/zsh
+# Prepares a release: sets the version in info.plist, commits and tags it.
+# Pushing the tag makes GitHub Actions build and publish memes.alfredworkflow.
+#
+#   bin/release 1.2.0
+
+set -e
+cd "${0:A:h:h}"
+version=${1:?usage: bin/release <version>}
+
+[[ $version =~ '^[0-9]+\.[0-9]+\.[0-9]+$' ]] || { echo "Version must look like 1.2.3" >&2; exit 1; }
+grep -q "^## $version\$" CHANGELOG.md || { echo "Add a '## $version' section to CHANGELOG.md first" >&2; exit 1; }
+[[ -z $(git status --porcelain -- ':!info.plist' ':!CHANGELOG.md') ]] || { echo "Commit or stash your other changes first" >&2; exit 1; }
+
+/usr/libexec/PlistBuddy -c "Set :version $version" info.plist
+git add info.plist CHANGELOG.md
+git diff --cached --quiet || git commit -m "Release $version"
+git tag "v$version"
+
+echo "Tagged v$version. Publish with:  git push && git push origin v$version"

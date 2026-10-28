@@ -29,7 +29,6 @@ const ICONS = {
 	annotate: 'ToolbarLabels.icns',
 	remove: 'TrashIcon.icns',
 	cancel: 'ToolbarDeleteIcon.icns',
-	warning: 'AlertCautionBadgeIcon.icns',
 	tag: 'ToolbarLabels.icns',
 	title: 'ClippingText.icns',
 	keywords: 'ToolbarLabels.icns',
@@ -70,9 +69,27 @@ function workflowDir() {
 	return fm.currentDirectoryPath.js;
 }
 
+let memesDirCache = null;
+
+// Where the collection lives: the configured folder; the memes/ of a git
+// checkout (bin/link); otherwise the workflow's data folder, which survives
+// workflow updates and starts out as a copy of the bundled memes.
 function memesDir() {
+	if (memesDirCache) return memesDirCache;
 	const configured = env('memes_dir').trim();
-	return (configured ? expandHome(configured) : workflowDir() + '/memes').replace(/\/+$/, '');
+	const bundled = workflowDir() + '/memes';
+	let dir = bundled;
+	if (configured) {
+		dir = expandHome(configured);
+	} else if (!exists(workflowDir() + '/.git') && env('alfred_workflow_data')) {
+		dir = env('alfred_workflow_data') + '/memes';
+		if (!exists(dir)) {
+			fm.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dirname(dir), true, $(), null);
+			fm.copyItemAtPathToPathError(bundled, dir, null);
+		}
+	}
+	memesDirCache = dir.replace(/\/+$/, '');
+	return memesDirCache;
 }
 
 function indexPath() {
@@ -486,12 +503,6 @@ function uniqueName(base, ext, taken) {
 	return name;
 }
 
-// The bundled collection lives inside the installed workflow and is replaced
-// on every update; only warn when that copy is not a link to a git checkout.
-function collectionIsVolatile() {
-	return !env('memes_dir').trim() && realPath(memesDir()).includes('/Alfred.alfredpreferences/');
-}
-
 // ---------------------------------------------------------------- session
 
 function loadSession() {
@@ -709,14 +720,6 @@ function menu(query) {
 				arg: act('resume'),
 				icon: { path: sessionImage(s) },
 				mods: { cmd: { arg: act('cancel'), subtitle: 'Discard the unsaved changes' } },
-			});
-		}
-		if (collectionIsVolatile()) {
-			items.push({
-				title: '⚠️ Changes are stored inside the installed workflow',
-				subtitle: 'They are lost when the workflow is updated. Set "Meme folder" in Configure Workflow, or use bin/link.',
-				valid: false,
-				icon: icon('warning'),
 			});
 		}
 		items.push({

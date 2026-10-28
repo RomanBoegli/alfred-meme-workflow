@@ -1027,12 +1027,12 @@ Details live in _index.yml inside the meme folder.
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string>Bundled memes</string>
+				<string>Workflow data folder</string>
 				<key>required</key>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Leave empty to use the memes bundled with the workflow. Point it at the memes/ folder of your git checkout to manage the collection there.</string>
+			<string>Leave empty to keep the collection in the workflow data folder (it starts with the bundled memes and survives updates). Pick a folder to keep it elsewhere, e.g. a synced folder or a git checkout.</string>
 			<key>label</key>
 			<string>Meme folder</string>
 			<key>type</key>
@@ -1065,7 +1065,7 @@ Details live in _index.yml inside the meme folder.
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.2.0</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/RomanBoegli/alfred-meme-workflow</string>
 </dict>
